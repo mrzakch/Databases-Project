@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -21,20 +22,21 @@ public class Databases_Project extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        Button acc_lookup_select = new Button();
+        acc_lookup_select.setText("Lookup Event");
+        acc_lookup_select.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+                //System.out.println("Lookup Account");
             }
         });
         
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
+        root.getChildren().add(acc_lookup_select);
+
+        Scene scene = new Scene(root, 500, 700);
+        scene.setFill(Color.BLUE);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
