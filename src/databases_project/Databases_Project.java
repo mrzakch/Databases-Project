@@ -19,28 +19,19 @@ import javafx.stage.Stage;
  * @author Kyle
  */
 public class Databases_Project extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-        Button acc_lookup_select = new Button();
-        acc_lookup_select.setText("Lookup Event");
-        acc_lookup_select.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                //System.out.println("Lookup Account");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(acc_lookup_select);
 
-        Scene scene = new Scene(root, 500, 700);
-        scene.setFill(Color.BLUE);
-        
+        MenuManager main_menu = new MenuManager(500, 900);
+
+        main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "Lookup Account");
+        main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "New Account");
+
         primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(main_menu.getMenuScene());
         primaryStage.show();
+
     }
 
     /**
@@ -49,5 +40,5 @@ public class Databases_Project extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
