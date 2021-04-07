@@ -64,6 +64,7 @@ public class MenuManager {
             public void handle(ActionEvent event) {
                 System.out.println("Clicked " + menu_title);
                 primary.setScene(to_add);
+                primary.setTitle(menu_title);
                 primary.show();
             }
         });

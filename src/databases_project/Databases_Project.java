@@ -28,7 +28,7 @@ public class Databases_Project extends Application {
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "Lookup Account");
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "New Account");
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Main Menu");
         primaryStage.setScene(main_menu.getMenuScene());
         primaryStage.show();
 
