@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
  *
  * @author Kyle
  */
-public class AccountLookupSubmenu {
+public class NewAccountSubmenu {
     public static Scene Build(MenuManager main_menu){
         
         StackPane pane = new StackPane();
@@ -38,36 +39,52 @@ public class AccountLookupSubmenu {
             }
         });
         
+        //Center VBox
         VBox info_entry = new VBox(5);
+        info_entry.setPadding(new Insets(10,10,10,10));
         info_entry.setFillWidth(false);
         info_entry.setAlignment(Pos.CENTER);
         
-        TextField account_input = new TextField();
-        account_input.setText("Account ID");
+        HBox customer_hbox = new HBox(2);
         
-        Label err = new Label();
-        err.setTextFill(Color.RED);
-        err.setText("");
+        TextField customer_input = new TextField();
+        customer_input.setText("");
+        
+        Button new_customer = new Button();
+        new_customer.setText("New");
+        new_customer.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("New customer click");
+            }
+        });
+        
+        customer_hbox.getChildren().addAll(new Label("Customer ID: "),customer_input,new Label(" or "),new_customer);
+        
+        HBox interest_rate_hbox = new HBox(2);
+        
+        TextField interest_rate_input = new TextField();
+        
+        interest_rate_hbox.getChildren().addAll(new Label("Interest Rate: "),interest_rate_input);
+        
+        HBox balance_hbox = new HBox(2);
+        
+        TextField init_balance_input = new TextField();
+        
+        balance_hbox.getChildren().addAll(new Label("Initial Balance: "),init_balance_input);
         
         Button lookup = new Button();
-        lookup.setText("Lookup");
+        lookup.setText("Create");
         lookup.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                try {
-                    int account_num=Integer.parseInt(account_input.getText());
-                    System.out.println("Looking up "+account_num);
-                } catch (NumberFormatException e){
-                    System.out.println("Input is NAN");
-                    err.setText("Please enter a valid ID");
-                }
+                System.out.println("Creating new acc");
             }
         });
         
-        
-        
-        info_entry.getChildren().addAll(account_input,lookup,err);
+        info_entry.getChildren().addAll(customer_hbox,interest_rate_hbox,balance_hbox,lookup);
         
         pane.getChildren().addAll(info_entry,back_button);
         pane.setAlignment(back_button,Pos.TOP_LEFT);

@@ -39,7 +39,7 @@ public class Databases_Project extends Application {
         MenuManager main_menu = new MenuManager(500, 900, primaryStage);
 
         main_menu.addToMenu(AccountLookupSubmenu.Build(main_menu), "Lookup Account");
-        main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "New Account");
+        main_menu.addToMenu(NewAccountSubmenu.Build(main_menu), "New Account");
 
         main_menu.returnToMenu();
 
