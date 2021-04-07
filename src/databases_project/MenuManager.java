@@ -75,6 +75,12 @@ public class MenuManager {
         menu_scenes = extend_scenes;
 
     }
+    
+    public void returnToMenu(){
+        primary.setScene(menu);
+        primary.setTitle("Main Menu");
+        primary.show();
+    }
 
     public Scene getMenuScene() {
         return menu;

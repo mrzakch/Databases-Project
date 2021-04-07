@@ -17,6 +17,19 @@ import javafx.stage.Stage;
 /**
  *
  * @author Kyle
+ * 
+Submenus: (For reference)
+Account lookup 
+Account management
+Opening of new accounts with new customers.
+Employee management
+Task management
+Department management
+Loan Processing
+Branch Information
+
+ * 
+ * 
  */
 public class Databases_Project extends Application {
 
@@ -25,12 +38,10 @@ public class Databases_Project extends Application {
 
         MenuManager main_menu = new MenuManager(500, 900, primaryStage);
 
-        main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "Lookup Account");
+        main_menu.addToMenu(AccountLookupSubmenu.Build(main_menu), "Lookup Account");
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "New Account");
 
-        primaryStage.setTitle("Main Menu");
-        primaryStage.setScene(main_menu.getMenuScene());
-        primaryStage.show();
+        main_menu.returnToMenu();
 
     }
 
