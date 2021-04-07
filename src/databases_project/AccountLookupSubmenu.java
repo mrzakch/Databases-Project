@@ -11,9 +11,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -42,17 +44,29 @@ public class AccountLookupSubmenu {
         TextField account_input = new TextField();
         account_input.setText("Account ID");
         
+        Label err = new Label();
+        err.setTextFill(Color.RED);
+        err.setText("");
+        
         Button lookup = new Button();
         lookup.setText("Lookup");
         lookup.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Looking up "+account_input.getText());
+                try {
+                    int account_num=Integer.parseInt(account_input.getText());
+                    System.out.println("Looking up "+account_num);
+                } catch (NumberFormatException e){
+                    System.out.println("Input is NAN");
+                    err.setText("Input is NAN");
+                }
             }
         });
         
-        info_entry.getChildren().addAll(account_input,lookup);
+        
+        
+        info_entry.getChildren().addAll(account_input,lookup,err);
         
         pane.getChildren().addAll(info_entry,back_button);
         pane.setAlignment(back_button,Pos.TOP_LEFT);
