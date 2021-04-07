@@ -19,9 +19,9 @@ import javafx.stage.Stage;
  * @author Kyle
  * 
 Submenus: (For reference)
-Account lookup 
-Account management
-Opening of new accounts with new customers.
+Account lookup (Designed)
+Account management (subsidiary of lookup, need to get proper lookup info first)
+Opening of new accounts with new customers. (Designed)
 Employee management
 Task management
 Department management
@@ -36,10 +36,12 @@ public class Databases_Project extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        MenuManager main_menu = new MenuManager(500, 900, primaryStage);
+        MenuManager main_menu = new MenuManager(500, 500, primaryStage);
 
+        //Temporarily storing these here for easier management, will eventually have dedicated method in main_menu
         main_menu.addToMenu(AccountLookupSubmenu.Build(main_menu), "Lookup Account");
         main_menu.addToMenu(NewAccountSubmenu.Build(main_menu), "New Account");
+        main_menu.addToMenu(EmployeeManagementSubmenu.Build(main_menu),"Employee Management");
 
         main_menu.returnToMenu();
 
