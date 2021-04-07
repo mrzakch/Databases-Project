@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -23,12 +24,15 @@ public class MenuManager {
     private Button[] buttons;
     private StackPane root;
     private Scene menu;
+    
+    private Stage primary;
 
-    public MenuManager(double x, double y) {
+    public MenuManager(double x, double y, Stage primaryStage) {
         root = new StackPane();
         menu = new Scene(root, x, y);
         menu_scenes = new Scene[0];
         buttons = new Button[0];
+        primary = primaryStage;
     }
 
     public void addToMenu(Scene to_add, String menu_title) {
@@ -59,6 +63,8 @@ public class MenuManager {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Clicked " + menu_title);
+                primary.setScene(to_add);
+                primary.show();
             }
         });
 

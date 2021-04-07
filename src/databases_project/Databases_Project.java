@@ -23,7 +23,7 @@ public class Databases_Project extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        MenuManager main_menu = new MenuManager(500, 900);
+        MenuManager main_menu = new MenuManager(500, 900, primaryStage);
 
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "Lookup Account");
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500), "New Account");
