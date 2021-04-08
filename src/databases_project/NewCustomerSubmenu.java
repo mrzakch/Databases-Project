@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -24,7 +25,7 @@ import javafx.stage.Stage;
  * @author Kyle
  */
 public class NewCustomerSubmenu {
-    public static Scene Build(NewAccountSubmenu callback){
+    public static Scene Build(MenuManager main_menu, String start_id){
         
         StackPane pane = new StackPane();
         pane.setPadding(new Insets(10,10,10,10));
@@ -47,26 +48,27 @@ public class NewCustomerSubmenu {
         
         HBox customer_hbox = new HBox(2);
         
-        TextField customer_input = new TextField();
-        customer_input.setText("");
+        TextField person_input = new TextField();
+        person_input.setText("");
         
-        Button new_customer = new Button();
-        new_customer.setText("New");
-        new_customer.setOnAction(new EventHandler<ActionEvent>() {
+        Button new_person = new Button();
+        new_person.setText("New");
+        new_person.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("New customer click");
+                System.out.println("New person click");
             }
         });
         
-        customer_hbox.getChildren().addAll(new Label("Customer ID: "),customer_input,new Label(" or "),new_customer);
+        customer_hbox.getChildren().addAll(new Label("Person ID: "),person_input,new Label(" or "),new_person);
         
         HBox interest_rate_hbox = new HBox(2);
         
-        TextField interest_rate_input = new TextField();
+        ComboBox<String> customer_type = new ComboBox<String>();
+        customer_type.getItems().addAll("Person","Corporate","Municipal");
         
-        interest_rate_hbox.getChildren().addAll(new Label("Interest Rate: "),interest_rate_input);
+        interest_rate_hbox.getChildren().addAll(new Label("Customer Type: "),customer_type);
         
         HBox balance_hbox = new HBox(2);
         
@@ -80,7 +82,10 @@ public class NewCustomerSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Creating new acc");
+                Scene callback = AccountLookupSubmenu.Build(main_menu,"NewPersonID!");
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Account");
+                primary.setScene(callback);
             }
         });
         
@@ -91,5 +96,9 @@ public class NewCustomerSubmenu {
         pane.setAlignment(info_entry,Pos.CENTER);
         Scene scene = new Scene(pane,500,500);
         return scene;
+    }
+    
+    public static Scene Build(MenuManager main_menu){
+        return NewCustomerSubmenu.Build(main_menu,"");
     }
 }

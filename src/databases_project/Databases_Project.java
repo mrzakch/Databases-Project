@@ -14,6 +14,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.sql.*;
+
 /**
  *
  * @author Kyle
@@ -35,7 +37,7 @@ public class Databases_Project extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
+        
         MenuManager main_menu = new MenuManager(500, 500, primaryStage);
 
         //Temporarily storing these here for easier management, will eventually have dedicated method in main_menu

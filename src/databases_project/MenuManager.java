@@ -85,5 +85,9 @@ public class MenuManager {
     public Scene getMenuScene() {
         return menu;
     }
+    
+    public Stage getPrimary(){
+        return primary;
+    }
 
 }

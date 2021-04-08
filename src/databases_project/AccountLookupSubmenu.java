@@ -22,8 +22,9 @@ import javafx.stage.Stage;
  *
  * @author Kyle
  */
-public class AccountLookupSubmenu {
-    public static Scene Build(MenuManager main_menu){
+
+public class AccountLookupSubmenu {   
+    public static Scene Build(MenuManager main_menu, String start_id){
         
         StackPane pane = new StackPane();
         pane.setPadding(new Insets(10,10,10,10));
@@ -43,7 +44,7 @@ public class AccountLookupSubmenu {
         info_entry.setAlignment(Pos.CENTER);
         
         TextField account_input = new TextField();
-        account_input.setText("Account ID");
+        account_input.setText(start_id);
         
         Label err = new Label();
         err.setTextFill(Color.RED);
@@ -74,5 +75,9 @@ public class AccountLookupSubmenu {
         pane.setAlignment(info_entry,Pos.CENTER);
         Scene scene = new Scene(pane,500,500);
         return scene;
+    }
+    
+    public static Scene Build(MenuManager main_menu){
+        return AccountLookupSubmenu.Build(main_menu,"");
     }
 }

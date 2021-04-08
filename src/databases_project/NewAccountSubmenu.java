@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * @author Kyle
  */
 public class NewAccountSubmenu {
-    public static Scene Build(MenuManager main_menu){
+    public static Scene Build(MenuManager main_menu, String start_id){
         
         StackPane pane = new StackPane();
         pane.setPadding(new Insets(10,10,10,10));
@@ -48,7 +48,7 @@ public class NewAccountSubmenu {
         HBox customer_hbox = new HBox(2);
         
         TextField customer_input = new TextField();
-        customer_input.setText("");
+        customer_input.setText(start_id);
         
         Button new_customer = new Button();
         new_customer.setText("New");
@@ -56,7 +56,9 @@ public class NewAccountSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("New customer click");
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Customer Creation");
+                primary.setScene(NewCustomerSubmenu.Build(main_menu));
             }
         });
         
@@ -91,5 +93,9 @@ public class NewAccountSubmenu {
         pane.setAlignment(info_entry,Pos.CENTER);
         Scene scene = new Scene(pane,500,500);
         return scene;
+    }
+    
+    public static Scene Build(MenuManager main_menu){
+        return NewAccountSubmenu.Build(main_menu,"");
     }
 }
