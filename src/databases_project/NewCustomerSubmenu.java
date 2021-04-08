@@ -61,7 +61,10 @@ public class NewCustomerSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("New person click");
+                Scene callback = NewPersonSubmenu.Build(main_menu,"NewCustomerSubmenu");
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Person");
+                primary.setScene(callback);
             }
         });
         //Add to person hbox
@@ -83,7 +86,7 @@ public class NewCustomerSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //implement actual new person id info here
-                Scene callback = NewAccountSubmenu.Build(main_menu,"NewPersonID!");
+                Scene callback = NewAccountSubmenu.Build(main_menu,"NewCustomerID!");
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("New Account");
                 primary.setScene(callback);
