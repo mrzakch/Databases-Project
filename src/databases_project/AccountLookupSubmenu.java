@@ -24,11 +24,12 @@ import javafx.stage.Stage;
  */
 
 public class AccountLookupSubmenu {   
+    //Builds the scene for Account Lookup
     public static Scene Build(MenuManager main_menu, String start_id){
-        
+        //Init main stackpane
         StackPane pane = new StackPane();
         pane.setPadding(new Insets(10,10,10,10));
-        
+        //Create back button
         Button back_button = new Button();
         back_button.setText("Back");
         back_button.setOnAction(new EventHandler<ActionEvent>() {
@@ -38,18 +39,18 @@ public class AccountLookupSubmenu {
                 main_menu.returnToMenu();
             }
         });
-        
+        //Create main central VBox
         VBox info_entry = new VBox(5);
         info_entry.setFillWidth(false);
         info_entry.setAlignment(Pos.CENTER);
-        
+        //Account input textbox creation.
         TextField account_input = new TextField();
         account_input.setText(start_id);
-        
+        //Create error label.
         Label err = new Label();
         err.setTextFill(Color.RED);
         err.setText("");
-        
+        //Create main lookup button.
         Button lookup = new Button();
         lookup.setText("Lookup");
         lookup.setOnAction(new EventHandler<ActionEvent>() {
@@ -59,6 +60,7 @@ public class AccountLookupSubmenu {
                 try {
                     int account_num=Integer.parseInt(account_input.getText());
                     System.out.println("Looking up "+account_num);
+                    //Add lookup functionality!
                 } catch (NumberFormatException e){
                     System.out.println("Input is NAN");
                     err.setText("Please enter a valid ID");
@@ -67,16 +69,17 @@ public class AccountLookupSubmenu {
         });
         
         
-        
+        //Add UI elements to VBox.
         info_entry.getChildren().addAll(account_input,lookup,err);
-        
+        //Add UI elements to root.
         pane.getChildren().addAll(info_entry,back_button);
+        //Align root UI elements properly.
         pane.setAlignment(back_button,Pos.TOP_LEFT);
         pane.setAlignment(info_entry,Pos.CENTER);
         Scene scene = new Scene(pane,500,500);
         return scene;
     }
-    
+    //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu){
         return AccountLookupSubmenu.Build(main_menu,"");
     }

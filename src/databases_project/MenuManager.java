@@ -27,6 +27,7 @@ public class MenuManager {
     
     private Stage primary;
 
+    //Self explainatory constructor.
     public MenuManager(double x, double y, Stage primaryStage) {
         root = new StackPane();
         menu = new Scene(root, x, y);
@@ -35,6 +36,7 @@ public class MenuManager {
         primary = primaryStage;
     }
 
+    //Adds a scene to the menu, automatically creating the button and storing the Scene.
     public void addToMenu(Scene to_add, String menu_title) {
         //Takes a scene and makes a button for it in the menu's scene.
         Scene[] extend_scenes = new Scene[menu_scenes.length + 1];
@@ -57,35 +59,39 @@ public class MenuManager {
 
         extend_buttons[buttons.length] = new_button;
         
-
+        //Sets up button action
         new_button.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Clicked " + menu_title);
+                //System.out.println("Clicked " + menu_title);
                 primary.setScene(to_add);
                 primary.setTitle(menu_title);
                 primary.show();
             }
         });
-
+        //Adds button to main root.
         root.getChildren().add(new_button);
         
+        //Updates variables to reflect the current state of the obj.
         buttons=extend_buttons;
         menu_scenes = extend_scenes;
 
     }
     
+    //Takes the application back to the main menu
     public void returnToMenu(){
         primary.setScene(menu);
         primary.setTitle("Main Menu");
         primary.show();
     }
 
+    //Getter used for situations where returnToMenu is not sufficient.
     public Scene getMenuScene() {
         return menu;
     }
     
+    //Getter for primary stage, used in submenus to transition correctly.
     public Stage getPrimary(){
         return primary;
     }
