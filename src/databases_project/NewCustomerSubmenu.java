@@ -37,7 +37,10 @@ public class NewCustomerSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                //Implement logic
+                Scene callback = NewAccountSubmenu.Build(main_menu,"");
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Account");
+                primary.setScene(callback);
             }
         });
         
@@ -80,7 +83,7 @@ public class NewCustomerSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //implement actual new person id info here
-                Scene callback = AccountLookupSubmenu.Build(main_menu,"NewPersonID!");
+                Scene callback = NewAccountSubmenu.Build(main_menu,"NewPersonID!");
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("New Account");
                 primary.setScene(callback);
