@@ -81,6 +81,6 @@ public class AccountLookupSubmenu {
     }
     //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu){
-        return AccountLookupSubmenu.Build(main_menu,"");
+        return AccountLookupSubmenu.Build(main_menu,"Account ID");
     }
 }

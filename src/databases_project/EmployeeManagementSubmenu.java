@@ -64,7 +64,7 @@ public class EmployeeManagementSubmenu {
        
         
         Button lookup = new Button();
-        lookup.setText("Create");
+        lookup.setText("Manage");
         lookup.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

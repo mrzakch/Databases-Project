@@ -88,7 +88,7 @@ public class NewPersonSubmenu {
         //Add to person name hbox
         person_ssn_hbox.getChildren().addAll(new Label("Person's SSN: "), ssn_input);
 
-        //Create new customer button
+        //Create new person button
         Button lookup = new Button();
         lookup.setText("Create");
         lookup.setOnAction(new EventHandler<ActionEvent>() {
