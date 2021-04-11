@@ -95,10 +95,10 @@ public class NewLoanSubmenu {
         TextField interest_input = new TextField();
         
         //interest label
-        Label interest_label= new Label("Interest: ");
+        Label interest_label= new Label("Interest: 0");
 
         //Add to interest hbox
-        interest_hbox.getChildren().addAll(interest_label,interest_input);
+        interest_hbox.getChildren().addAll(interest_label);
         
         //Interest rate HBox
         HBox interest_rate_hbox = new HBox(5);
