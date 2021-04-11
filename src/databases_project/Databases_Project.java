@@ -43,7 +43,7 @@ public class Databases_Project extends Application {
         //Temporarily storing these here for easier management, will eventually have dedicated method in main_menu
         main_menu.addToMenu(AccountLookupSubmenu.Build(main_menu), "Lookup Account");
         main_menu.addToMenu(NewAccountSubmenu.Build(main_menu), "New Account");
-        main_menu.addToMenu(EmployeeManagementSubmenu.Build(main_menu),"Employee Management");
+        main_menu.addToMenu(EmployeeLookupSubmenu.Build(main_menu),"Employee Management");
         
         //Considering making this part of the employee management submenu.
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Task Management");

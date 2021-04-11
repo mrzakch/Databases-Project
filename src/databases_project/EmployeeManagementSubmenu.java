@@ -5,12 +5,14 @@
  */
 package databases_project;
 
+import java.lang.reflect.Method;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -24,61 +26,126 @@ import javafx.stage.Stage;
  * @author Kyle
  */
 public class EmployeeManagementSubmenu {
-    public static Scene Build(MenuManager main_menu){
-        
+
+    //Builds the scene for New Person
+    public static Scene Build(MenuManager main_menu, EmployeeInformation info) {
+        //Init main stackpane
         StackPane pane = new StackPane();
-        pane.setPadding(new Insets(10,10,10,10));
-        
+        pane.setPadding(new Insets(10, 10, 10, 10));
+        //Create back button
         Button back_button = new Button();
         back_button.setText("Back");
         back_button.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                main_menu.returnToMenu();
+                Scene callback = EmployeeLookupSubmenu.Build(main_menu,String.valueOf(info.employee_id));
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Employee Management");
+                primary.setScene(callback);
             }
         });
-        
+
         //Center VBox
         VBox info_entry = new VBox(5);
-        info_entry.setPadding(new Insets(10,10,10,10));
+        info_entry.setPadding(new Insets(10, 10, 10, 10));
         info_entry.setFillWidth(false);
         info_entry.setAlignment(Pos.CENTER);
         
-        HBox employee_hbox = new HBox(2);
-        
-        TextField employee_input = new TextField();
-        employee_input.setText("");
-        
-        Button new_employee = new Button();
-        new_employee.setText("New");
-        new_employee.setOnAction(new EventHandler<ActionEvent>() {
+        //position ID HBox
+        HBox position_hbox = new HBox(5);
+
+        //position label
+        Label position_label = new Label("Position ID: " + String.valueOf(info.position_id));
+
+        //Edit button
+        Button edit_position_button = new Button();
+        edit_position_button.setText("Change");
+        edit_position_button.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("New employee click");
+                System.out.println("Edit position click");
             }
         });
+        //Add to position hbox
+        position_hbox.getChildren().addAll(position_label, edit_position_button);
         
-        employee_hbox.getChildren().addAll(new Label("Employee ID: "),employee_input,new Label(" or "),new_employee);
-       
-        
-        Button lookup = new Button();
-        lookup.setText("Manage");
-        lookup.setOnAction(new EventHandler<ActionEvent>() {
+        //department ID HBox
+        HBox department_hbox = new HBox(5);
+
+        //department label
+        Label department_label = new Label("Department ID: " + String.valueOf(info.department_id));
+
+        //Edit button
+        Button edit_department_button = new Button();
+        edit_department_button.setText("Change");
+        edit_department_button.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Looking up employee");
+                System.out.println("Edit department click");
+            }
+        });
+        //Add to department hbox
+        department_hbox.getChildren().addAll(department_label, edit_department_button);
+        
+        Button delete_emp_button = new Button();
+        delete_emp_button.setText("Delete Employee");
+        delete_emp_button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Delete employee click");
             }
         });
         
-        info_entry.getChildren().addAll(employee_hbox,lookup);
+        //salary ID HBox
+        HBox salary_hbox = new HBox(5);
+
+        //salary label
+        Label salary_label = new Label("Salary ID: " + String.valueOf(info.salary));
+
+        //Edit button
+        Button edit_salary_button = new Button();
+        edit_salary_button.setText("Change");
+        edit_salary_button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Edit salary click");
+            }
+        });
+        //Add to salary hbox
+        salary_hbox.getChildren().addAll(salary_label, edit_salary_button);
         
-        pane.getChildren().addAll(info_entry,back_button);
-        pane.setAlignment(back_button,Pos.TOP_LEFT);
-        pane.setAlignment(info_entry,Pos.CENTER);
-        Scene scene = new Scene(pane,500,500);
+        //home_branch ID HBox
+        HBox home_branch_hbox = new HBox(5);
+
+        //home_branch label
+        Label home_branch_label = new Label("Home Branch ID: " + String.valueOf(info.home_branch_id));
+
+        //Edit button
+        Button edit_home_branch_button = new Button();
+        edit_home_branch_button.setText("Change");
+        edit_home_branch_button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Edit home branch click");
+            }
+        });
+        //Add to home_branch hbox
+        home_branch_hbox.getChildren().addAll(home_branch_label, edit_home_branch_button);
+
+        //Add to central vbox
+        info_entry.getChildren().addAll(position_hbox,department_hbox,salary_hbox,home_branch_hbox,delete_emp_button);
+        //Add to root
+        pane.getChildren().addAll(info_entry, back_button);
+        //Set alignments
+        pane.setAlignment(back_button, Pos.TOP_LEFT);
+        pane.setAlignment(info_entry, Pos.CENTER);
+        Scene scene = new Scene(pane, 500, 500);
         return scene;
     }
 }
