@@ -110,7 +110,7 @@ public class NewEmployeeSubmenu {
         TextField salary_input = new TextField();
 
         //salary label
-        Label salary_label = new Label("Salary ID: ");
+        Label salary_label = new Label("Salary: ");
 
         //Add to salary hbox
         salary_hbox.getChildren().addAll(salary_label, salary_input);
