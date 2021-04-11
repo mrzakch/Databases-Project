@@ -27,7 +27,7 @@ Opening of new accounts with new customers. UI COMPLETE
 Employee management UI COMPLETE
 Task management (Changing this)
 Department management UI COMPLETE
-Loan Processing (needs edit rate and new loan menus)
+Loan Processing (needs new loan and make payment menus)
 Branch Information UI COMPLETE
 
  * 

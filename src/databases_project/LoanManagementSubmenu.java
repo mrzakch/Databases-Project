@@ -102,7 +102,10 @@ public class LoanManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Edit rate click");
+                Scene callback = LoanEditingSubmenu.Build(main_menu, "InterestRate" ,info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Editing Interest Rate");
+                primary.setScene(callback);
             }
         });
         //Add to home_branch hbox
