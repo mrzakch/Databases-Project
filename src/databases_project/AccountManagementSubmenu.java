@@ -41,7 +41,7 @@ public class AccountManagementSubmenu {
             public void handle(ActionEvent event) {
                 Scene callback = AccountLookupSubmenu.Build(main_menu,String.valueOf(info.accountid));
                 Stage primary = main_menu.getPrimary();
-                primary.setTitle("New Account");
+                primary.setTitle("Lookup Account");
                 primary.setScene(callback);
             }
         });
@@ -59,9 +59,9 @@ public class AccountManagementSubmenu {
         //Add to balance hbox
         balance_hbox.getChildren().addAll(new Label("Balance: "), balance_label);
         
-        //Main balance hbox
+        //Main interest rate hbox
         HBox interest_rate_hbox = new HBox(5);
-        //Balance Label
+        //Interest rate Label
         Label interest_rate_label = new Label(String.valueOf(info.interest_rate));
       
         //Add to interest rate hbox
