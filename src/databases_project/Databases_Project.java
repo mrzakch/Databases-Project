@@ -44,9 +44,9 @@ public class Databases_Project extends Application {
         main_menu.addToMenu(AccountLookupSubmenu.Build(main_menu), "Lookup Account");
         main_menu.addToMenu(NewAccountSubmenu.Build(main_menu), "New Account");
         main_menu.addToMenu(EmployeeManagementSubmenu.Build(main_menu),"Employee Management");
+        //Considering making this part of the employee management submenu.
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Task Management");
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Department Management");
-        main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Task Management");
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Loan Processing");
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Branch Information");
         

@@ -61,6 +61,11 @@ public class AccountLookupSubmenu {
                     int account_num=Integer.parseInt(account_input.getText());
                     System.out.println("Looking up "+account_num);
                     //Add lookup functionality!
+                    //testing assumed lookup
+                    Scene callback = AccountManagementSubmenu.Build(main_menu,new AccountInformation(account_num,(float) 0.00,(float) 0.00,0));
+                    Stage primary = main_menu.getPrimary();
+                    primary.setTitle("Account Management || "+account_input.getText());
+                    primary.setScene(callback);
                 } catch (NumberFormatException e){
                     System.out.println("Input is NAN");
                     err.setText("Please enter a valid ID");
