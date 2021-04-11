@@ -39,7 +39,7 @@ public class LoanManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                Scene callback = LoanLookupSubmenu.Build(main_menu,String.valueOf(info.id));
+                Scene callback = LoanLookupSubmenu.Build(main_menu, String.valueOf(info.id));
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Loan Processing");
                 primary.setScene(callback);
@@ -51,26 +51,25 @@ public class LoanManagementSubmenu {
         info_entry.setPadding(new Insets(10, 10, 10, 10));
         info_entry.setFillWidth(false);
         info_entry.setAlignment(Pos.CENTER);
-        
+
         //customer ID HBox
         HBox customer_hbox = new HBox(5);
 
         //customer label
         Label customer_label = new Label("Customer ID: " + String.valueOf(info.customer_id));
-        
+
         //add to customer hbox
         customer_hbox.getChildren().addAll(customer_label);
-        
+
         //Authorizer ID HBox
         HBox auth_hbox = new HBox(5);
 
         //Authorizer label
         Label auth_label = new Label("Authorizer ID: " + String.valueOf(info.approver_id));
-        
 
         //Add to Authorizer hbox
         auth_hbox.getChildren().addAll(auth_label);
-        
+
         //principle HBox
         HBox principle_hbox = new HBox(5);
 
@@ -79,16 +78,16 @@ public class LoanManagementSubmenu {
 
         //Add to principle hbox
         principle_hbox.getChildren().addAll(principle_label);
-        
+
         //interest HBox
         HBox interest_hbox = new HBox(5);
 
         //interest label
-        Label interest_label= new Label("Interest: " + String.valueOf(info.interest));
+        Label interest_label = new Label("Interest: " + String.valueOf(info.interest));
 
         //Add to interest hbox
         interest_hbox.getChildren().addAll(interest_label);
-        
+
         //Interest rate HBox
         HBox interest_rate_hbox = new HBox(5);
 
@@ -102,7 +101,7 @@ public class LoanManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                Scene callback = LoanEditingSubmenu.Build(main_menu, "InterestRate" ,info);
+                Scene callback = LoanEditingSubmenu.Build(main_menu, "InterestRate", info);
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Editing Interest Rate");
                 primary.setScene(callback);
@@ -110,25 +109,27 @@ public class LoanManagementSubmenu {
         });
         //Add to home_branch hbox
         interest_rate_hbox.getChildren().addAll(interest_rate_label, edit_interest_rate_button);
-        
+
         //Creating button array
         HBox manage_button_hbox = new HBox(10);
-        
+
         Button pay_button = new Button();
         pay_button.setText("Make Payment");
         pay_button.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Payment click");
+                Scene callback = NewPaymentSubmenu.Build(main_menu, info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Loan Payment || " + String.valueOf(info.id));
+                primary.setScene(callback);
             }
         });
-        
-        
+
         manage_button_hbox.getChildren().addAll(pay_button);
 
         //Add to central vbox
-        info_entry.getChildren().addAll(customer_hbox,auth_hbox, principle_hbox, interest_hbox, interest_rate_hbox,manage_button_hbox);
+        info_entry.getChildren().addAll(customer_hbox, auth_hbox, principle_hbox, interest_hbox, interest_rate_hbox, manage_button_hbox);
         //Add to root
         pane.getChildren().addAll(info_entry, back_button);
         //Set alignments
