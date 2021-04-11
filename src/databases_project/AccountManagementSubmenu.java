@@ -117,10 +117,21 @@ public class AccountManagementSubmenu {
             }
         });
         
+        
         manage_button_hbox.getChildren().addAll(deposit_button,withdraw_button,transfer_button,edit_rate_button);
+        
+        Button delete_acc_button = new Button();
+        delete_acc_button.setText("Delete Account");
+        delete_acc_button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Delete account click");
+            }
+        });
 
         //Add to central vbox
-        info_entry.getChildren().addAll(customer_id_hbox, balance_hbox, interest_rate_hbox, manage_button_hbox);
+        info_entry.getChildren().addAll(customer_id_hbox, balance_hbox, interest_rate_hbox, manage_button_hbox,delete_acc_button);
         //Add to root
         pane.getChildren().addAll(info_entry, back_button);
         //Set alignments
