@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author Kyle
  */
 
-public class DepartmentLookupSubmenu {   
+public class BranchLookupSubmenu {   
     //Builds the scene for Account Lookup
     public static Scene Build(MenuManager main_menu, String start_id){
         //Init main stackpane
@@ -43,9 +43,9 @@ public class DepartmentLookupSubmenu {
         VBox info_entry = new VBox(5);
         info_entry.setFillWidth(false);
         info_entry.setAlignment(Pos.CENTER);
-        //Department input textbox creation.
-        TextField department_input = new TextField();
-        department_input.setText(start_id);
+        //Branch input textbox creation.
+        TextField branch_input = new TextField();
+        branch_input.setText(start_id);
         //Create error label.
         Label err = new Label();
         err.setTextFill(Color.RED);
@@ -58,13 +58,13 @@ public class DepartmentLookupSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    int dept_num=Integer.parseInt(department_input.getText());
-                    System.out.println("Looking up "+dept_num);
+                    int branch_num=Integer.parseInt(branch_input.getText());
+                    System.out.println("Looking up "+branch_num);
                     //Add lookup functionality!
                     //testing assumed lookup
-                    Scene callback = DepartmentManagementSubmenu.Build(main_menu,new DepartmentInformation(dept_num,"Test Department",0));
+                    Scene callback = BranchManagementSubmenu.Build(main_menu,new BranchInformation(branch_num,0,0));
                     Stage primary = main_menu.getPrimary();
-                    primary.setTitle("Department Management || "+department_input.getText());
+                    primary.setTitle("Branch Management || "+branch_input.getText());
                     primary.setScene(callback);
                 } catch (NumberFormatException e){
                     System.out.println("Input is NAN");
@@ -75,7 +75,7 @@ public class DepartmentLookupSubmenu {
         
         
         //Add UI elements to VBox.
-        info_entry.getChildren().addAll(department_input,lookup,err);
+        info_entry.getChildren().addAll(branch_input,lookup,err);
         //Add UI elements to root.
         pane.getChildren().addAll(info_entry,back_button);
         //Align root UI elements properly.
@@ -86,6 +86,6 @@ public class DepartmentLookupSubmenu {
     }
     //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu){
-        return DepartmentLookupSubmenu.Build(main_menu,"Department ID");
+        return BranchLookupSubmenu.Build(main_menu,"Branch ID");
     }
 }

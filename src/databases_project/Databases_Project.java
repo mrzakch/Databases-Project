@@ -26,8 +26,8 @@ Account management UI COMPLETE
 Opening of new accounts with new customers. Create Address needed
 Employee management Create Employee Needed
 Task management
-Department management UI COMPLETE
-Loan Processing
+Department management (needs editing menus)
+Loan Processing (needs edit rate menu)
 Branch Information
 
  * 
@@ -50,7 +50,7 @@ public class Databases_Project extends Application {
         
         main_menu.addToMenu(DepartmentLookupSubmenu.Build(main_menu),"Department Management");
         main_menu.addToMenu(LoanLookupSubmenu.Build(main_menu),"Loan Processing");
-        main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Branch Information");
+        main_menu.addToMenu(BranchLookupSubmenu.Build(main_menu),"Branch Information");
         
         main_menu.returnToMenu();
 
