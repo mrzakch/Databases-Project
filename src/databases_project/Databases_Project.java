@@ -21,12 +21,12 @@ import java.sql.*;
  * @author Kyle
  * 
 Submenus: (For reference)
-Account lookup (Designed)
-Account management (subsidiary of lookup, need to get proper lookup info first)
-Opening of new accounts with new customers. (Designed)
-Employee management
+Account lookup UI COMPLETE
+Account management UI COMPLETE
+Opening of new accounts with new customers. Create Address needed
+Employee management Create Employee Needed
 Task management
-Department management
+Department management UI COMPLETE
 Loan Processing
 Branch Information
 
@@ -49,7 +49,7 @@ public class Databases_Project extends Application {
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Task Management");
         
         main_menu.addToMenu(DepartmentLookupSubmenu.Build(main_menu),"Department Management");
-        main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Loan Processing");
+        main_menu.addToMenu(LoanLookupSubmenu.Build(main_menu),"Loan Processing");
         main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Branch Information");
         
         main_menu.returnToMenu();
