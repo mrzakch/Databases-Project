@@ -42,9 +42,14 @@ public class NewPersonSubmenu {
                 if (calltype.equals("NewCustomerSubmenu")) {
                     Scene callback = NewCustomerSubmenu.Build(main_menu, "");
                     Stage primary = main_menu.getPrimary();
-                    primary.setTitle("New Account");
+                    primary.setTitle("New Customer");
                     primary.setScene(callback);
-                } //ADD ELSE IF HERE FOR NEW EMPLOYEE SUBMENU
+                }  else if (calltype.equals("NewEmployeeSubmenu")){
+                    Scene callback = NewEmployeeSubmenu.Build(main_menu, "");
+                    Stage primary = main_menu.getPrimary();
+                    primary.setTitle("New Employee");
+                    primary.setScene(callback);
+                }
             }
         });
 
@@ -69,7 +74,7 @@ public class NewPersonSubmenu {
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("New Address");
                 primary.setScene(callback);
-            }
+            } 
         });
         //Add to address hbox
         address_hbox.getChildren().addAll(new Label("Address ID: "), address_input, new Label(" or "), new_address);
@@ -103,9 +108,14 @@ public class NewPersonSubmenu {
                 if (calltype.equals("NewCustomerSubmenu")) {
                     Scene callback = NewCustomerSubmenu.Build(main_menu, "NewPersonID!");
                     Stage primary = main_menu.getPrimary();
-                    primary.setTitle("New Account");
+                    primary.setTitle("New Customer");
                     primary.setScene(callback);
-                } //ADD ELSE IF HERE FOR NEW EMPLOYEE SUBMENU
+                } else if (calltype.equals("NewEmployeeSubmenu")){
+                    Scene callback = NewEmployeeSubmenu.Build(main_menu, "NewPersonID!");
+                    Stage primary = main_menu.getPrimary();
+                    primary.setTitle("New Employee");
+                    primary.setScene(callback);
+                }
             }
         });
         //Add to central vbox

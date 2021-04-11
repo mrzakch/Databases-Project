@@ -23,7 +23,7 @@ import java.sql.*;
 Submenus: (For reference)
 Account lookup UI COMPLETE
 Account management UI COMPLETE
-Opening of new accounts with new customers. Create Address needed
+Opening of new accounts with new customers. UI COMPLETE
 Employee management Create Employee Needed
 Task management
 Department management (needs editing menus and adding dept)

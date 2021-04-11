@@ -56,7 +56,10 @@ public class EmployeeLookupSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("New employee click");
+                Scene callback = NewEmployeeSubmenu.Build(main_menu);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Employee");
+                primary.setScene(callback);
             }
         });
         
