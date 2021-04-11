@@ -56,7 +56,9 @@ public class LoanLookupSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("New loan click");
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Loan Creation");
+                primary.setScene(NewLoanSubmenu.Build(main_menu));
             }
         });
         
