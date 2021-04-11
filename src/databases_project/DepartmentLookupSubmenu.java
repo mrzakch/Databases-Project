@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -43,9 +44,28 @@ public class DepartmentLookupSubmenu {
         VBox info_entry = new VBox(5);
         info_entry.setFillWidth(false);
         info_entry.setAlignment(Pos.CENTER);
+        //Department ID HBox
+        HBox dept_hbox = new HBox(2);
+                
         //Department input textbox creation.
         TextField department_input = new TextField();
         department_input.setText(start_id);
+        
+        Button new_dept = new Button();
+        new_dept.setText("New");
+        new_dept.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                Scene callback = NewDepartmentSubmenu.Build(main_menu);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Department Creation");
+                primary.setScene(callback);
+            }
+        });
+        
+        dept_hbox.getChildren().addAll(department_input,new Label(" or "), new_dept);
+        
         //Create error label.
         Label err = new Label();
         err.setTextFill(Color.RED);
@@ -75,7 +95,7 @@ public class DepartmentLookupSubmenu {
         
         
         //Add UI elements to VBox.
-        info_entry.getChildren().addAll(department_input,lookup,err);
+        info_entry.getChildren().addAll(dept_hbox,lookup,err);
         //Add UI elements to root.
         pane.getChildren().addAll(info_entry,back_button);
         //Align root UI elements properly.
