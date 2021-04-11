@@ -117,7 +117,7 @@ public class LoanManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Edit IR click");
+                System.out.println("Payment click");
             }
         });
         

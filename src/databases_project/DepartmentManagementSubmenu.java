@@ -72,7 +72,10 @@ public class DepartmentManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Edit manager click");
+                Scene callback = DepartmentEditingSubmenu.Build(main_menu, "ManagerID" ,info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Editing Manager ID");
+                primary.setScene(callback);
             }
         });
         //Add to manager hbox

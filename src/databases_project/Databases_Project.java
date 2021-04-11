@@ -26,7 +26,7 @@ Account management UI COMPLETE
 Opening of new accounts with new customers. UI COMPLETE
 Employee management UI COMPLETE
 Task management (Changing this)
-Department management (needs editing menus and adding dept)
+Department management UI COMPLETE
 Loan Processing (needs edit rate and new loan menus)
 Branch Information UI COMPLETE
 
