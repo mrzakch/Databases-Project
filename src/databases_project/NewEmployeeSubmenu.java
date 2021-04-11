@@ -128,7 +128,7 @@ public class NewEmployeeSubmenu {
         home_branch_hbox.getChildren().addAll(home_branch_label, home_branch_input);
         
         Button create_emp_button = new Button();
-        create_emp_button.setText("Delete Employee");
+        create_emp_button.setText("Create Employee");
         create_emp_button.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

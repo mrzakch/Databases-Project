@@ -24,10 +24,10 @@ Submenus: (For reference)
 Account lookup UI COMPLETE
 Account management UI COMPLETE
 Opening of new accounts with new customers. UI COMPLETE
-Employee management Create Employee Needed
+Employee management UI COMPLETE
 Task management
 Department management (needs editing menus and adding dept)
-Loan Processing (needs edit rate menu)
+Loan Processing (needs edit rate and new loan menus)
 Branch Information (needs adding branch)
 
  * 

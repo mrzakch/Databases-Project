@@ -23,9 +23,8 @@ import javafx.stage.Stage;
  *
  * @author Kyle
  */
-
-public class BranchLookupSubmenu {   
-    //Builds the scene for Account Lookup
+public class NewBranchSubmenu {
+    //Builds the scene for New Account
     public static Scene Build(MenuManager main_menu, String start_id){
         //Init main stackpane
         StackPane pane = new StackPane();
@@ -37,66 +36,60 @@ public class BranchLookupSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                main_menu.returnToMenu();
+                Scene callback = BranchLookupSubmenu.Build(main_menu);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Branch Information");
+                primary.setScene(callback);
             }
         });
-        //Create main central VBox
+        
+        //Center VBox
         VBox info_entry = new VBox(5);
+        info_entry.setPadding(new Insets(10,10,10,10));
         info_entry.setFillWidth(false);
         info_entry.setAlignment(Pos.CENTER);
-        //Branch input textbox creation.
-        HBox branch_hbox = new HBox(3);
-        
-        TextField branch_input = new TextField();
-        branch_input.setText(start_id);
-        
-        Button new_branch = new Button();
-        new_branch.setText("New");
-        new_branch.setOnAction(new EventHandler<ActionEvent>() {
+        //HBox for address id input
+        HBox address_hbox = new HBox(2);
+        //Main ID input
+        TextField address_input = new TextField();
+        address_input.setText(start_id);
+        //Create new customer button
+        Button new_address = new Button();
+        new_address.setText("New");
+        new_address.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 Stage primary = main_menu.getPrimary();
-                primary.setTitle("New Branch");
-                primary.setScene(NewBranchSubmenu.Build(main_menu));
+                primary.setTitle("New Address");
+                primary.setScene(NewBranchAddressSubmenu.Build(main_menu));
             }
         });
-        
-        branch_hbox.getChildren().addAll(branch_input,new Label(" or "),new_branch);
-        
-        //Create error label.
-        Label err = new Label();
-        err.setTextFill(Color.RED);
-        err.setText("");
-        //Create main lookup button.
+        //Add to the main customer HBox
+        address_hbox.getChildren().addAll(new Label("Address ID: "),address_input,new Label(" or "),new_address);
+        //Manager HBox
+        HBox manager_hbox = new HBox(2);
+        //Main Interest Rate Input
+        TextField manager_input = new TextField();
+        //Add to interest rate HBox
+        manager_hbox.getChildren().addAll(new Label("Manager ID: "),manager_input);
+
+        //Button to create new account
         Button lookup = new Button();
-        lookup.setText("Lookup");
+        lookup.setText("Create");
         lookup.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                try {
-                    int branch_num=Integer.parseInt(branch_input.getText());
-                    System.out.println("Looking up "+branch_num);
-                    //Add lookup functionality!
-                    //testing assumed lookup
-                    Scene callback = BranchManagementSubmenu.Build(main_menu,new BranchInformation(branch_num,0,0));
-                    Stage primary = main_menu.getPrimary();
-                    primary.setTitle("Branch Management || "+branch_input.getText());
-                    primary.setScene(callback);
-                } catch (NumberFormatException e){
-                    System.out.println("Input is NAN");
-                    err.setText("Please enter a valid ID");
-                }
+                //Put a label with the new ID
+                System.out.println("Creating new branch");
             }
         });
-        
-        
-        //Add UI elements to VBox.
-        info_entry.getChildren().addAll(branch_hbox,lookup,err);
-        //Add UI elements to root.
+        //Add to main VBox
+        info_entry.getChildren().addAll(address_hbox,manager_hbox,lookup);
+        //Add to root
         pane.getChildren().addAll(info_entry,back_button);
-        //Align root UI elements properly.
+        //Adjust positioning
         pane.setAlignment(back_button,Pos.TOP_LEFT);
         pane.setAlignment(info_entry,Pos.CENTER);
         Scene scene = new Scene(pane,500,500);
@@ -104,6 +97,6 @@ public class BranchLookupSubmenu {
     }
     //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu){
-        return BranchLookupSubmenu.Build(main_menu,"Branch ID");
+        return NewBranchSubmenu.Build(main_menu,"");
     }
 }
