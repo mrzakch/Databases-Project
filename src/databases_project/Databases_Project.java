@@ -26,9 +26,9 @@ Account management UI COMPLETE
 Opening of new accounts with new customers. Create Address needed
 Employee management Create Employee Needed
 Task management
-Department management (needs editing menus)
+Department management (needs editing menus and adding dept)
 Loan Processing (needs edit rate menu)
-Branch Information
+Branch Information (needs adding branch)
 
  * 
  * 

@@ -65,7 +65,10 @@ public class NewPersonSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("New address click");
+                Scene callback = NewAddressSubmenu.Build(main_menu, calltype, start_id);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Address");
+                primary.setScene(callback);
             }
         });
         //Add to address hbox
