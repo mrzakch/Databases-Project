@@ -5,6 +5,11 @@
  */
 package databases_project;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -81,11 +86,12 @@ public class LoanLookupSubmenu {
                     System.out.println("Looking up "+loan_num);
                     //Add lookup functionality!
                     //testing assumed lookup
-                    Scene callback = LoanManagementSubmenu.Build(main_menu,new LoanInformation(loan_num,0,0,0,0,0));
+                    LoanInformation loan_info = LoanLookup(main_menu, loan_num);
+                    Scene callback = LoanManagementSubmenu.Build(main_menu,new LoanInformation(loan_num,loan_info.principle, loan_info.customer_id, loan_info.approver_id, loan_info.interest, loan_info.interest_rate));
                     Stage primary = main_menu.getPrimary();
                     primary.setTitle("Loan Management || "+loan_input.getText());
                     primary.setScene(callback);
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException | SQLException e){
                     System.out.println("Input is NAN");
                     err.setText("Please enter a valid ID");
                 }
@@ -100,6 +106,21 @@ public class LoanLookupSubmenu {
         pane.setAlignment(info_entry,Pos.CENTER);
         Scene scene = new Scene(pane,500,500);
         return scene;
+    }
+    
+    public static LoanInformation LoanLookup(MenuManager main, int loan_num) throws SQLException {
+    	//creation of the query in JDBC. Can be moved directly to database if needed
+    	Connection reservation = main.connectDatabase();
+    	String sql = "SELECT CustomerID, LoanOfficerEmployeeID, Principal, Interest, InterestRate FROM loan WHERE LoanID = "+(String.valueOf(loan_num));
+    	Statement statement = reservation.createStatement();
+    	ResultSet out = statement.executeQuery(sql);
+    	
+    	if(out!=null) {
+    		LoanInformation loan_info = new LoanInformation(loan_num,  out.getFloat("Principal"), out.getInt("CustomerID"), out.getInt("LoanOfficerEmployeeID"), out.getFloat("Interest"), out.getFloat("InterestRate"));
+    		return loan_info;
+    	}else {
+    		return null;
+    	}
     }
     
     public static Scene Build(MenuManager main_menu){
