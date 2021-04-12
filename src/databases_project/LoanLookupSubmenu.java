@@ -117,6 +117,7 @@ public class LoanLookupSubmenu {
     	
     	if(out!=null) {
     		LoanInformation loan_info = new LoanInformation(loan_num,  out.getFloat("Principal"), out.getInt("CustomerID"), out.getInt("LoanOfficerEmployeeID"), out.getFloat("Interest"), out.getFloat("InterestRate"));
+    		main.closeDatabase();
     		return loan_info;
     	}else {
     		return null;

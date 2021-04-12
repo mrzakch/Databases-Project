@@ -97,6 +97,7 @@ public class AccountLookupSubmenu {
     	
     	if(out!=null) {
     		AccountInformation acct = new AccountInformation(acct_num, out.getFloat("Balance"), out.getFloat("InterestRate"), out.getInt("CustomerID"));
+    		main.closeDatabase();
     		return acct;
     	}else {
     		return null;

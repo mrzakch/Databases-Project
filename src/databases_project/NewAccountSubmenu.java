@@ -5,6 +5,12 @@
  */
 package databases_project;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -97,6 +103,21 @@ public class NewAccountSubmenu {
         Scene scene = new Scene(pane,500,500);
         return scene;
     }
+    
+  //creation of the query in JDBC. Can be moved directly to database if needed
+    public static void addAccountDatabase(MenuManager mainM, int acctID, int custID, float interestRate, float initialBalance) throws SQLException {
+    	//input of new account info into database
+    	Connection reservation = mainM.connectDatabase();
+    	String sql = "INSERT INTO account (AccountID, Balance, InterestRate, CustomerID) VALUES(?, ?, ?, ?)";
+    	PreparedStatement statement = reservation.prepareStatement(sql);
+    	statement.setInt(1, acctID);
+    	statement.setInt(2, custID);
+    	statement.setFloat(3, interestRate);
+    	statement.setFloat(4, initialBalance);
+    	mainM.closeDatabase();
+    	
+    }
+    
     //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu){
         return NewAccountSubmenu.Build(main_menu,"");
