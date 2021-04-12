@@ -5,6 +5,10 @@
  */
 package databases_project;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.*;
@@ -24,6 +28,7 @@ public class MenuManager {
     private Button[] buttons;
     private StackPane root;
     private Scene menu;
+    private Connection reservation;
     
     private Stage primary;
 
@@ -77,6 +82,28 @@ public class MenuManager {
         buttons=extend_buttons;
         menu_scenes = extend_scenes;
 
+    }
+    
+    public Connection connectDatabase() {
+    	//connection to local hosting of database
+    	//root is unnamed account and password is database password
+    	String url = "jdbc:mysql://localhost:3306/Project";
+    	String username = "root";
+   		String password = "password";
+   		
+   		try {
+   			reservation = DriverManager.getConnection(url, username, password);
+    		return reservation;	
+    			
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+
+   	}
+    
+    public void closeDatabase() throws SQLException {
+    	reservation.close();
     }
     
     //Takes the application back to the main menu

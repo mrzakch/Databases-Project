@@ -5,6 +5,7 @@
  */
 package databases_project;
 
+import java.sql.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -62,11 +63,12 @@ public class AccountLookupSubmenu {
                     System.out.println("Looking up "+account_num);
                     //Add lookup functionality!
                     //testing assumed lookup
-                    Scene callback = AccountManagementSubmenu.Build(main_menu,new AccountInformation(account_num,(float) 0.00,(float) 0.00,0));
+                    float[] output = accountLookup(main_menu, account_num);
+                    Scene callback = AccountManagementSubmenu.Build(main_menu,new AccountInformation(account_num,output[0],output[1],(int)output[2]));
                     Stage primary = main_menu.getPrimary();
                     primary.setTitle("Account Management || "+account_input.getText());
                     primary.setScene(callback);
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException | SQLException e){
                     System.out.println("Input is NAN");
                     err.setText("Please enter a valid ID");
                 }
@@ -84,6 +86,26 @@ public class AccountLookupSubmenu {
         Scene scene = new Scene(pane,500,500);
         return scene;
     }
+    
+    @SuppressWarnings("null")
+	public static float[] accountLookup(MenuManager main, int acct_num) throws SQLException {
+    	//creation of the query in JDBC. Can be moved directly to database if needed
+    	Connection reservation = main.connectDatabase();
+    	String sql = "SELECT Balance, InterestRate, CustomerID FROM account WHERE AccountID = "+(String.valueOf(acct_num));
+    	Statement statement = reservation.createStatement();
+    	ResultSet out = statement.executeQuery(sql);
+    	
+    	float[] found = new float[3];
+    	if(out!=null) {
+        	found[0]= Float.parseFloat(out.getString("Balance"));
+        	found[1] =  Float.parseFloat(out.getString("InterestRate"));
+        	found[2] =  Float.parseFloat(out.getString("CustomerID"));
+    		return found;
+    	}else {
+    		return null;
+    	}
+    }
+    
     //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu){
         return AccountLookupSubmenu.Build(main_menu,"Account ID");
