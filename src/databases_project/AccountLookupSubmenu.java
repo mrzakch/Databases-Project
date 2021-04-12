@@ -90,9 +90,8 @@ public class AccountLookupSubmenu {
 	public static AccountInformation accountLookup(MenuManager main, int acct_num) throws SQLException {
     	//creation of the query in JDBC. Can be moved directly to database if needed
     	Connection reservation = main.connectDatabase();
-
-    	String sql = "SELECT Balance, InterestRate, CustomerID FROM customeraccount WHERE AccountID = "+(String.valueOf(acct_num));
-    	Statement statement = reservation.createStatement();
+    	String sql = "SELECT Balance, InterestRate, CustomerID FROM account WHERE AccountID = "+(String.valueOf(acct_num));
+    	PreparedStatement statement = reservation.prepareStatement(sql);
     	ResultSet out = statement.executeQuery(sql);
     	
     	if(out.next()) {
