@@ -25,7 +25,7 @@ Account lookup UI COMPLETE
 Account management UI COMPLETE
 Opening of new accounts with new customers. UI COMPLETE
 Employee management UI COMPLETE
-Task management (Changing this)
+Task management UI COMPLETE
 Department management UI COMPLETE
 Loan Processing UI COMPLETE
 Branch Information UI COMPLETE
@@ -46,7 +46,7 @@ public class Databases_Project extends Application {
         main_menu.addToMenu(EmployeeLookupSubmenu.Build(main_menu),"Employee Management");
         
         //Considering making this part of the employee management submenu.
-        main_menu.addToMenu(new Scene(new StackPane(), 500, 500),"Task Management");
+        main_menu.addToMenu(TaskLookupSubmenu.Build(main_menu),"Task Management");
         
         main_menu.addToMenu(DepartmentLookupSubmenu.Build(main_menu),"Department Management");
         main_menu.addToMenu(LoanLookupSubmenu.Build(main_menu),"Loan Processing");
