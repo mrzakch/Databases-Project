@@ -69,8 +69,7 @@ public class AccountLookupSubmenu {
                     primary.setTitle("Account Management || "+account_input.getText());
                     primary.setScene(callback);
                 } catch (NumberFormatException | SQLException e){
-                    System.out.println("Input is NAN");
-                    err.setText("Please enter a valid ID");
+                    e.printStackTrace();
                 }
             }
         });
@@ -91,11 +90,11 @@ public class AccountLookupSubmenu {
 	public static AccountInformation accountLookup(MenuManager main, int acct_num) throws SQLException {
     	//creation of the query in JDBC. Can be moved directly to database if needed
     	Connection reservation = main.connectDatabase();
-    	String sql = "SELECT Balance, InterestRate, CustomerID FROM account WHERE AccountID = "+(String.valueOf(acct_num));
+    	String sql = "SELECT Balance, InterestRate, CustomerID FROM customeraccount WHERE AccountID = "+(String.valueOf(acct_num));
     	PreparedStatement statement = reservation.prepareStatement(sql);
     	ResultSet out = statement.executeQuery(sql);
     	
-    	if(out!=null) {
+    	if(out.next()) {
     		AccountInformation acct = new AccountInformation(acct_num, out.getFloat("Balance"), out.getFloat("InterestRate"), out.getInt("CustomerID"));
     		main.closeDatabase();
     		return acct;

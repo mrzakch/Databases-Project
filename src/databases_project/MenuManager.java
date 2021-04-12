@@ -87,15 +87,16 @@ public class MenuManager {
     public Connection connectDatabase() {
     	//connection to local hosting of database
     	//root is unnamed account and password is database password
-    	String url = "jdbc:mysql://localhost:3306/Project";
+    	String url = "jdbc:mysql://localhost:3306/project3450";
     	String username = "root";
-   		String password = "password";
+   		String password = "";
    		
    		try {
+                    Class.forName("com.mysql.jdbc.Driver");
    			reservation = DriverManager.getConnection(url, username, password);
     		return reservation;	
     			
-    	}catch(SQLException e) {
+    	}catch(SQLException | ClassNotFoundException e) {
     		e.printStackTrace();
     		return null;
     	}

@@ -115,7 +115,7 @@ public class LoanLookupSubmenu {
     	Statement statement = reservation.createStatement();
     	ResultSet out = statement.executeQuery(sql);
     	
-    	if(out!=null) {
+    	if(out.next()) {
     		LoanInformation loan_info = new LoanInformation(loan_num,  out.getFloat("Principal"), out.getInt("CustomerID"), out.getInt("LoanOfficerEmployeeID"), out.getFloat("Interest"), out.getFloat("InterestRate"));
     		main.closeDatabase();
     		return loan_info;
