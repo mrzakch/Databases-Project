@@ -82,10 +82,10 @@ public class TaskLookupSubmenu {
                     System.out.println("Looking up "+task_num);
                     //Add lookup functionality!
                     //testing assumed lookup
-//                    Scene callback = TaskManagementSubmenu.Build(main_menu,new EmployeeInformation(task_num,0,0,0,0));
-//                    Stage primary = main_menu.getPrimary();
-//                    primary.setTitle("Task Management || "+task_input.getText());
-//                    primary.setScene(callback);
+                    Scene callback = TaskManagementSubmenu.Build(main_menu);
+                    Stage primary = main_menu.getPrimary();
+                    primary.setTitle("Task Management || "+task_input.getText());
+                    primary.setScene(callback);
                 } catch (NumberFormatException e){
                     System.out.println("Input is NAN");
                     err.setText("Please enter a valid ID");
