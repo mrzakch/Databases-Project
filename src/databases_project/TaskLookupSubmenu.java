@@ -56,10 +56,10 @@ public class TaskLookupSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-//                Scene callback = NewTaskSubmenu.Build(main_menu);
-//                Stage primary = main_menu.getPrimary();
-//                primary.setTitle("New Task");
-//                primary.setScene(callback);
+                Scene callback = NewTaskSubmenu.Build(main_menu);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("New Task");
+                primary.setScene(callback);
             }
         });
         
