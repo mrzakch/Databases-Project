@@ -25,7 +25,7 @@ Account lookup UI COMPLETE
 Account management UI COMPLETE
 Opening of new accounts with new customers. UI COMPLETE
 Employee management UI COMPLETE
-Task management (Changing this)
+Task management UI COMPLETE
 Department management UI COMPLETE
 Loan Processing UI COMPLETE
 Branch Information UI COMPLETE

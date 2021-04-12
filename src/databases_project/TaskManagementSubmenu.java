@@ -63,9 +63,20 @@ public class TaskManagementSubmenu {
                 primary.setScene(callback);
             }
         });
+        
+        
+        Button delete_button = new Button();
+        delete_button.setText("Delete Task");
+        delete_button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                //delete
+            }
+        });
 
         //Add UI elements to root.
-        pane.getChildren().addAll(back_button,new Label("Task Title: "+info.title),new Label("Task Description: "+info.description),new Label("Employees With Task:"));
+        pane.getChildren().addAll(back_button,new Label("Task Title: "+info.title),new Label("Task Description: "+info.description),delete_button,new Label("Employees With Task:"));
         //Align root UI elements properly.
         
         //FOR LOOP ADD ALL MATCHING ACCOUNTS
@@ -73,6 +84,31 @@ public class TaskManagementSubmenu {
         for (int i = 0; i<ids.length;i++){
             pane.getChildren().add(makeLine(ids[i]));
         }
+        
+        HBox add_employee_hbox = new HBox(3);
+        
+        TextField employee_input = new TextField();
+        employee_input.setText("New Employee ID");
+        
+        Button add_button = new Button();
+        add_button.setText("Add");
+        add_button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    int account_num=Integer.parseInt(employee_input.getText());
+                    System.out.println("Adding "+account_num);
+                    //ADD HERE
+                } catch (NumberFormatException e){
+                    System.out.println("Input is NAN");
+                }
+            }
+        });
+        
+        add_employee_hbox.getChildren().addAll(employee_input,add_button);
+        
+        pane.getChildren().add(add_employee_hbox);
         
         ScrollPane parent = new ScrollPane();
         parent.setContent(pane);
