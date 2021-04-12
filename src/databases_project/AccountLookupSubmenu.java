@@ -63,8 +63,8 @@ public class AccountLookupSubmenu {
                     System.out.println("Looking up "+account_num);
                     //Add lookup functionality!
                     //testing assumed lookup
-                    float[] output = accountLookup(main_menu, account_num);
-                    Scene callback = AccountManagementSubmenu.Build(main_menu,new AccountInformation(account_num,output[0],output[1],(int)output[2]));
+                    AccountInformation account = accountLookup(main_menu, account_num);
+                    Scene callback = AccountManagementSubmenu.Build(main_menu,new AccountInformation(account_num, account.balance, account.interest_rate, account.customerid));
                     Stage primary = main_menu.getPrimary();
                     primary.setTitle("Account Management || "+account_input.getText());
                     primary.setScene(callback);
@@ -88,19 +88,16 @@ public class AccountLookupSubmenu {
     }
     
     @SuppressWarnings("null")
-	public static float[] accountLookup(MenuManager main, int acct_num) throws SQLException {
+	public static AccountInformation accountLookup(MenuManager main, int acct_num) throws SQLException {
     	//creation of the query in JDBC. Can be moved directly to database if needed
     	Connection reservation = main.connectDatabase();
     	String sql = "SELECT Balance, InterestRate, CustomerID FROM account WHERE AccountID = "+(String.valueOf(acct_num));
     	Statement statement = reservation.createStatement();
     	ResultSet out = statement.executeQuery(sql);
     	
-    	float[] found = new float[3];
     	if(out!=null) {
-        	found[0]= Float.parseFloat(out.getString("Balance"));
-        	found[1] =  Float.parseFloat(out.getString("InterestRate"));
-        	found[2] =  Float.parseFloat(out.getString("CustomerID"));
-    		return found;
+    		AccountInformation acct = new AccountInformation(acct_num, out.getFloat("Balance"), out.getFloat("InterestRate"), out.getInt("CustomerID"));
+    		return acct;
     	}else {
     		return null;
     	}
