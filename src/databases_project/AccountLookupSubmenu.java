@@ -92,7 +92,7 @@ public class AccountLookupSubmenu {
     	//creation of the query in JDBC. Can be moved directly to database if needed
     	Connection reservation = main.connectDatabase();
     	String sql = "SELECT Balance, InterestRate, CustomerID FROM account WHERE AccountID = "+(String.valueOf(acct_num));
-    	Statement statement = reservation.prepareStatement(sql);
+    	PreparedStatement statement = reservation.prepareStatement(sql);
     	ResultSet out = statement.executeQuery(sql);
     	
     	if(out!=null) {
