@@ -126,6 +126,7 @@ public class AccountManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
+                //String sql = "DELETE FROM customeraccount WHERE AccountID = "+(String.valueOf(info.accountid));
                 System.out.println("Delete account click");
             }
         });

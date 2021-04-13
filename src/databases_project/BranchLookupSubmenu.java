@@ -79,6 +79,7 @@ public class BranchLookupSubmenu {
                     int branch_num=Integer.parseInt(branch_input.getText());
                     System.out.println("Looking up "+branch_num);
                     //Add lookup functionality!
+                    //String sql = "SELECT AddressID, ManagerEmployeeID FROM branch WHERE BranchID = "+(branch_input.getText()));
                     //testing assumed lookup
                     Scene callback = BranchManagementSubmenu.Build(main_menu,new BranchInformation(branch_num,0,0));
                     Stage primary = main_menu.getPrimary();
