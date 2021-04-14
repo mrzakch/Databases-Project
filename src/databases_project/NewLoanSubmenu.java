@@ -90,9 +90,6 @@ public class NewLoanSubmenu {
         
         //interest HBox
         HBox interest_hbox = new HBox(5);
-
-        //interest input
-        TextField interest_input = new TextField();
         
         //interest label
         Label interest_label= new Label("Interest: 0");
@@ -122,6 +119,7 @@ public class NewLoanSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //handle adding to database
+//String sql = "INSERT INTO loan(CustomerID, LoanOfficerEmployeeID, Principal, Interest, InterestRate) VALUES ("+(customer_input.getText())+", "+(auth_input.getText())+", "+(principle_input.getText())+",0, "+(interest_rate_input.getText())+");");=
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Loan Processing");
                 primary.setScene(LoanLookupSubmenu.Build(main_menu,"NewLoanID!"));

@@ -71,7 +71,7 @@ public class TaskManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                //delete
+                //String sql = "DELETE FROM task WHERE TaskID = "+(info.id));
             }
         });
 

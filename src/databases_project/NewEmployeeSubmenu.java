@@ -133,6 +133,7 @@ public class NewEmployeeSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
+//String sql = "INSERT INTO employee(PersonID, PositionID, DepartmentID, Salary, HomeBranchID) VALUES ("+(person_input.getText())+", "+(position_input.getText())+", "+(department_input.getText())+", "+(salary_input.getText())+", "+(home_branch_input.getText())+");");
                 System.out.println("Create employee click");
             }
         });

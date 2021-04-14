@@ -81,6 +81,7 @@ public class DepartmentLookupSubmenu {
                     int dept_num=Integer.parseInt(department_input.getText());
                     System.out.println("Looking up "+dept_num);
                     //Add lookup functionality!
+                    //String sql = "SELECT * FROM department WHERE DepartmentID = "+(department_input.getText()));
                     //testing assumed lookup
                     Scene callback = DepartmentManagementSubmenu.Build(main_menu,new DepartmentInformation(dept_num,"Test Department",0));
                     Stage primary = main_menu.getPrimary();

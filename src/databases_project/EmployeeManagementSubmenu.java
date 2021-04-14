@@ -96,6 +96,7 @@ public class EmployeeManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
+                //String sql = "DELETE FROM employee WHERE EmployeeID = "+String.valueOf(info.employee_id));
                 System.out.println("Delete employee click");
             }
         });

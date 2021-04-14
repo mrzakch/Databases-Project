@@ -60,6 +60,7 @@ public class DepartmentEditingSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //handle update push to database
+                //String sql = "SELECT "+editing+" FROM department WHERE DepartmentID = "+(info.id));
                 Scene callback = DepartmentManagementSubmenu.Build(main_menu, info);
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Department Management || " + String.valueOf(info.id));

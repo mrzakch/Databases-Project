@@ -104,6 +104,7 @@ public class NewPersonSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //implement actual new person id info here
+//String sql = "INSERT INTO person(PersonName, AddressID, SSN) VALUES ("+(name_input.getText())+", "+(address_input.getText())+", "+(ssn_input.getText())+");");
                 Class[] args = {MenuManager.class, String.class};
                 if (calltype.equals("NewCustomerSubmenu")) {
                     Scene callback = NewCustomerSubmenu.Build(main_menu, "NewPersonID!");

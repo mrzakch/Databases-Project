@@ -80,6 +80,7 @@ public class NewAddressSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //make call to database to get new id
+//String sql = "INSERT INTO address(Street, City, State, ZIPCode) VALUES ("+(street_input.getText())+", "+(city_input.getText())+", "+(state_input.getText())+", "+(zip_input.getText())+");");
                 Scene callback = NewPersonSubmenu.Build(main_menu, calltype, "3451");
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("New Person");

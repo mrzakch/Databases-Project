@@ -22,9 +22,9 @@ import java.sql.*;
  * 
 Submenus: (For reference)
 Account lookup UI COMPLETE
-Account management UI COMPLETE
+Account management Need deposit/withdraw/transfer UI
 Opening of new accounts with new customers. UI COMPLETE
-Employee management UI COMPLETE
+Employee management Need new position ID and editing aspects UI
 Task management UI COMPLETE
 Department management UI COMPLETE
 Loan Processing UI COMPLETE

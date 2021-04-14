@@ -86,6 +86,7 @@ public class NewCustomerSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //implement actual new person id info here
+//String sql = "INSERT INTO customer(PersonID, CustomerType) VALUES ("+(person_input.getText())+", "+(customer_type.getValue())+");");
                 Scene callback = NewAccountSubmenu.Build(main_menu,"NewCustomerID!");
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("New Account");

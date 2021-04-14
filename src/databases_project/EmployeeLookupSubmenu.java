@@ -81,6 +81,7 @@ public class EmployeeLookupSubmenu {
                     int emp_num=Integer.parseInt(employee_input.getText());
                     System.out.println("Looking up "+emp_num);
                     //Add lookup functionality!
+                    //String sql = "SELECT * FROM employee WHERE DepartmentID = "+(info.id));
                     //testing assumed lookup
                     Scene callback = EmployeeManagementSubmenu.Build(main_menu,new EmployeeInformation(emp_num,0,0,0,0));
                     Stage primary = main_menu.getPrimary();

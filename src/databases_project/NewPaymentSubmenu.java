@@ -72,6 +72,8 @@ public class NewPaymentSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //make call to database to process payment
+//String sql = "UPDATE account SET " (SUBTRACT FROM CURRENT VALUE) " WHERE AccountID="+account_input.getText()+";";
+//String sql = "UPDATE loan SET " (SUBTRACT FROM CURRENT VALUE) " WHERE LoanID="+String.valueOf(info.id)+";";
                 Scene callback = LoanManagementSubmenu.Build(main_menu,info);
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Loan Management || "+String.valueOf(info.id));
