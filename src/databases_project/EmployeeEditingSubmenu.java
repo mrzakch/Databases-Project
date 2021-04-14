@@ -38,7 +38,7 @@ public class EmployeeEditingSubmenu {
             public void handle(ActionEvent event) {
                 Scene callback = EmployeeManagementSubmenu.Build(main_menu, info);
                 Stage primary = main_menu.getPrimary();
-                primary.setTitle("Department Management || " + String.valueOf(info.employee_id));
+                primary.setTitle("Employee Management || " + String.valueOf(info.employee_id));
                 primary.setScene(callback);
             }
         });

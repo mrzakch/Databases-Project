@@ -65,7 +65,10 @@ public class EmployeeManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Edit position click");
+                Scene callback = EmployeeEditingSubmenu.Build(main_menu,"PositionID",info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Editing Position");
+                primary.setScene(callback);
             }
         });
         //Add to position hbox
@@ -84,7 +87,10 @@ public class EmployeeManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Edit department click");
+                Scene callback = EmployeeEditingSubmenu.Build(main_menu,"DepartmentID",info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Editing Department");
+                primary.setScene(callback);
             }
         });
         //Add to department hbox
@@ -114,7 +120,10 @@ public class EmployeeManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Edit salary click");
+                Scene callback = EmployeeEditingSubmenu.Build(main_menu,"Salary",info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Editing Salary");
+                primary.setScene(callback);
             }
         });
         //Add to salary hbox
@@ -133,7 +142,10 @@ public class EmployeeManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Edit home branch click");
+                Scene callback = EmployeeEditingSubmenu.Build(main_menu,"HomeBranchID",info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Editing Home Branch");
+                primary.setScene(callback);
             }
         });
         //Add to home_branch hbox
