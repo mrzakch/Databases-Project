@@ -24,7 +24,7 @@ Submenus: (For reference)
 Account lookup UI COMPLETE
 Account management Need deposit/withdraw/transfer UI
 Opening of new accounts with new customers. UI COMPLETE
-Employee management Need new position ID and editing aspects UI
+Employee management UI COMPLETE
 Task management UI COMPLETE
 Department management UI COMPLETE
 Loan Processing UI COMPLETE
