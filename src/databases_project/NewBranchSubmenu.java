@@ -81,7 +81,7 @@ public class NewBranchSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                //Put a label with the new ID
+//String sql = "INSERT INTO branch(AddressID,ManagerEmployeeID) VALUES ("+(address_input.getText())+", "+(manager_input.getText())+");");
                 System.out.println("Creating new branch");
             }
         });

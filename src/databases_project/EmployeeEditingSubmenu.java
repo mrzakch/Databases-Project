@@ -22,10 +22,10 @@ import javafx.stage.Stage;
  *
  * @author Kyle
  */
-public class DepartmentEditingSubmenu {
+public class EmployeeEditingSubmenu {
 
     //Builds the scene for Account Lookup
-    public static Scene Build(MenuManager main_menu, String editing, DepartmentInformation info) {
+    public static Scene Build(MenuManager main_menu, String editing, EmployeeInformation info) {
         //Init main stackpane
         StackPane pane = new StackPane();
         pane.setPadding(new Insets(10, 10, 10, 10));
@@ -36,9 +36,9 @@ public class DepartmentEditingSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                Scene callback = DepartmentManagementSubmenu.Build(main_menu, info);
+                Scene callback = EmployeeManagementSubmenu.Build(main_menu, info);
                 Stage primary = main_menu.getPrimary();
-                primary.setTitle("Department Management || " + String.valueOf(info.id));
+                primary.setTitle("Employee Management || " + String.valueOf(info.employee_id));
                 primary.setScene(callback);
             }
         });
@@ -60,10 +60,10 @@ public class DepartmentEditingSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //handle update push to database
-                //String sql = "SELECT "+editing+" FROM department WHERE DepartmentID = "+(info.id));
-                Scene callback = DepartmentManagementSubmenu.Build(main_menu, info);
+                //String sql = "UPDATE employee SET "+editing+" = "+new_val_input+" WHERE EmployeeID = "+String.valueOf(info.employee_id));
+                Scene callback = EmployeeManagementSubmenu.Build(main_menu, info);
                 Stage primary = main_menu.getPrimary();
-                primary.setTitle("Department Management || " + String.valueOf(info.id));
+                primary.setTitle("Employee Management || " + String.valueOf(info.employee_id));
                 primary.setScene(callback);
             }
         });

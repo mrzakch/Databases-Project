@@ -83,7 +83,10 @@ public class AccountManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Deposit click");
+                Scene callback = AccountDepositSubmenu.Build(main_menu, info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Deposit");
+                primary.setScene(callback);
             }
         });
         
@@ -93,7 +96,10 @@ public class AccountManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Withdraw click");
+                Scene callback = AccountWithdrawSubmenu.Build(main_menu, info);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Withdrawal");
+                primary.setScene(callback);
             }
         });
         
@@ -126,6 +132,7 @@ public class AccountManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
+                //String sql = "DELETE FROM customeraccount WHERE AccountID = "+(String.valueOf(info.accountid));
                 System.out.println("Delete account click");
             }
         });

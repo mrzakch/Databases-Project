@@ -72,6 +72,7 @@ public class NewTaskSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //Create new ID in database
+//String sql = "INSERT INTO task(Title, TaskDescription) VALUES ("+(name_input.getText())+", "+(desc_input.getText())+");");
                 Scene callback = TaskLookupSubmenu.Build(main_menu,"NewTaskID!");
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Task Management");

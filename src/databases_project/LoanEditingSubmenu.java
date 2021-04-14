@@ -60,6 +60,7 @@ public class LoanEditingSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //handle update push to database
+                //String sql = "SELECT "+editing+" FROM loan WHERE LoanID = "+(info.id));
                 Scene callback = LoanManagementSubmenu.Build(main_menu, info);
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Loan Management || " + String.valueOf(info.id));

@@ -22,10 +22,10 @@ import javafx.stage.Stage;
  *
  * @author Kyle
  */
-public class DepartmentEditingSubmenu {
+public class AccountDepositSubmenu {
 
     //Builds the scene for Account Lookup
-    public static Scene Build(MenuManager main_menu, String editing, DepartmentInformation info) {
+    public static Scene Build(MenuManager main_menu, AccountInformation info) {
         //Init main stackpane
         StackPane pane = new StackPane();
         pane.setPadding(new Insets(10, 10, 10, 10));
@@ -36,9 +36,9 @@ public class DepartmentEditingSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                Scene callback = DepartmentManagementSubmenu.Build(main_menu, info);
+                Scene callback = AccountManagementSubmenu.Build(main_menu, info);
                 Stage primary = main_menu.getPrimary();
-                primary.setTitle("Department Management || " + String.valueOf(info.id));
+                primary.setTitle("Account Mangagement || " + String.valueOf(info.accountid));
                 primary.setScene(callback);
             }
         });
@@ -54,22 +54,22 @@ public class DepartmentEditingSubmenu {
         err.setText("");
         //Create main lookup button.
         Button lookup = new Button();
-        lookup.setText("Update");
+        lookup.setText("Submit");
         lookup.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 //handle update push to database
-                //String sql = "SELECT "+editing+" FROM department WHERE DepartmentID = "+(info.id));
-                Scene callback = DepartmentManagementSubmenu.Build(main_menu, info);
+                 //String sql = "UPDATE account SET balance = "+(CALCULATE NEW BALANCE)+" WHERE AccountID = "+String.valueOf(info.account_id));
+                Scene callback = AccountManagementSubmenu.Build(main_menu, info);
                 Stage primary = main_menu.getPrimary();
-                primary.setTitle("Department Management || " + String.valueOf(info.id));
+                primary.setTitle("Account Management || " + String.valueOf(info.accountid));
                 primary.setScene(callback);
             }
         });
 
         //Add UI elements to VBox.
-        info_entry.getChildren().addAll(new Label("Editing " + editing), new_val_input, lookup, err);
+        info_entry.getChildren().addAll(new Label("Depositing: "), new_val_input, lookup, err);
         //Add UI elements to root.
         pane.getChildren().addAll(info_entry, back_button);
         //Align root UI elements properly.

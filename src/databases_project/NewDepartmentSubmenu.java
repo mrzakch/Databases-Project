@@ -72,6 +72,7 @@ public class NewDepartmentSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //Create new ID in database
+//String sql = "INSERT INTO department(DepartmentName,ManagerEmployeeID) VALUES ("+(name_input.getText())+", "+(manager_input.getText())+");");
                 Scene callback = DepartmentLookupSubmenu.Build(main_menu,"NewDeptID!");
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Department Management");

@@ -88,6 +88,7 @@ public class DepartmentManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
+                //String sql = "DELETE FROM department WHERE DepartmentID = "+(info.id));
                 System.out.println("Delete dept click");
             }
         });

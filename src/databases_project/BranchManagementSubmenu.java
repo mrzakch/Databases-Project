@@ -85,6 +85,7 @@ public class BranchManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
+                //String sql = "DELETE FROM branch WHERE BranchID = "+(info.id));
                 System.out.println("Delete branch click");
             }
         });

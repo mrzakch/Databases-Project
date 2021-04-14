@@ -76,7 +76,7 @@ public class TaskLookupSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                //ADD LOOKUP FUNCTIONALITY
+                //String sql = "SELECT * FROM task WHERE TaskID = "+(task_input.getText()));
                 try {
                     int task_num=Integer.parseInt(task_input.getText());
                     System.out.println("Looking up "+task_num);

@@ -90,6 +90,7 @@ public class NewAccountSubmenu {
             @Override
             public void handle(ActionEvent event) {
                 //Put a label with the new ID
+//String sql = "INSERT INTO customeraccount(CustomerID, Balance, InterestRate) VALUES ("+(customer_input.getText())+", "+(init_balance_input.getText())+", "+(interest_rate_input.getText())+");");
                 System.out.println("Creating new acc");
             }
         });
