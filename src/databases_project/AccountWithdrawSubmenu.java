@@ -5,6 +5,8 @@
  */
 package databases_project;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -61,6 +63,17 @@ public class AccountWithdrawSubmenu {
             public void handle(ActionEvent event) {
                 //handle update push to database
                  //String sql = "UPDATE account SET balance = "+(CALCULATE NEW BALANCE)+" WHERE AccountID = "+String.valueOf(info.account_id));
+                 
+                try {
+                    Connection reservation = main_menu.connectDatabase();
+                    info.balance=info.balance-Float.parseFloat(new_val_input.getText());
+                    String sql = "UPDATE customeraccount SET Balance=" + info.balance;
+                    PreparedStatement statement = reservation.prepareStatement(sql);
+                    int out = statement.executeUpdate();
+                    main_menu.closeDatabase();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Scene callback = AccountManagementSubmenu.Build(main_menu, info);
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Account Management || " + String.valueOf(info.accountid));
