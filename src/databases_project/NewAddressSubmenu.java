@@ -5,6 +5,10 @@
  */
 package databases_project;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -81,10 +85,15 @@ public class NewAddressSubmenu {
             public void handle(ActionEvent event) {
                 //make call to database to get new id
 //String sql = "INSERT INTO address(Street, City, State, ZIPCode) VALUES ("+(street_input.getText())+", "+(city_input.getText())+", "+(state_input.getText())+", "+(zip_input.getText())+");");
-                Scene callback = NewPersonSubmenu.Build(main_menu, calltype, "3451");
+                try {
+                String new_add_id = addAddress(main_menu,street_input.getText(),city_input.getText(),state_input.getText(),Integer.parseInt(zip_input.getText()));
+                Scene callback = NewPersonSubmenu.Build(main_menu, calltype, new_add_id);
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("New Person");
                 primary.setScene(callback);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
         //Add to main VBox
@@ -101,5 +110,34 @@ public class NewAddressSubmenu {
     //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu) {
         return NewAddressSubmenu.Build(main_menu, "", "");
+    }
+    
+    public static String addAddress(MenuManager mainM, String Street, String City, String State, int ZIPCode) throws SQLException {
+    	//input of new account info into database
+    	Connection reservation = mainM.connectDatabase();
+    	String sql = "INSERT INTO address (Street, City, State, ZIPCode) VALUES(?, ?, ?, ?)";
+    	PreparedStatement statement = reservation.prepareStatement(sql);
+    	statement.setString(1, Street);
+    	statement.setString(2, City);
+    	statement.setString(3, State);
+        statement.setInt(4, ZIPCode);
+        int out=statement.executeUpdate();
+        
+        if (out==1){
+            String get_new_id = "SELECT AddressID FROM address WHERE  Street=\"" +Street+"\" AND ZIPCode=\""+ZIPCode+"\"";
+            PreparedStatement get_statement = reservation.prepareStatement(get_new_id);
+            ResultSet to_return = get_statement.executeQuery(get_new_id);
+            if (to_return.next()){
+                String new_id = String.valueOf(to_return.getInt("AddressID"));
+                mainM.closeDatabase();
+                return new_id;
+            } else {
+                mainM.closeDatabase();
+                return "Error getting new ID";
+            }
+        } else {
+            mainM.closeDatabase();
+            return "Error creating new address";
+        }
     }
 }
