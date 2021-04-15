@@ -111,7 +111,7 @@ public class EmployeeManagementSubmenu {
         HBox salary_hbox = new HBox(5);
 
         //salary label
-        Label salary_label = new Label("Salary ID: " + String.valueOf(info.salary));
+        Label salary_label = new Label("Salary: " + String.valueOf(info.salary));
 
         //Edit button
         Button edit_salary_button = new Button();

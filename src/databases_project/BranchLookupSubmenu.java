@@ -85,7 +85,7 @@ public class BranchLookupSubmenu {
                 //testing assumed lookup
                 try {
                     Connection reservation = main_menu.connectDatabase();
-                    String sql = "SELECT * FROM branch WHERE BranchID=" + branch_input;
+                    String sql = "SELECT * FROM branch WHERE BranchID=" + branch_input.getText();
                     PreparedStatement statement = reservation.prepareStatement(sql);
                     ResultSet out = statement.executeQuery();
                     if (out.next()) {
