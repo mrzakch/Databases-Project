@@ -72,7 +72,7 @@ public class DepartmentManagementSubmenu {
 
             @Override
             public void handle(ActionEvent event) {
-                Scene callback = DepartmentEditingSubmenu.Build(main_menu, "ManagerID" ,info);
+                Scene callback = DepartmentEditingSubmenu.Build(main_menu, "ManagerEmployeeID" ,info);
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Editing Manager ID");
                 primary.setScene(callback);

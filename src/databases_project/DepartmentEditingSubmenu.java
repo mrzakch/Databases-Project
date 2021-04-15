@@ -5,6 +5,8 @@
  */
 package databases_project;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -61,10 +63,19 @@ public class DepartmentEditingSubmenu {
             public void handle(ActionEvent event) {
                 //handle update push to database
                 //String sql = "SELECT "+editing+" FROM department WHERE DepartmentID = "+(info.id));
-                Scene callback = DepartmentManagementSubmenu.Build(main_menu, info);
-                Stage primary = main_menu.getPrimary();
-                primary.setTitle("Department Management || " + String.valueOf(info.id));
-                primary.setScene(callback);
+                try {
+                    Connection reservation = main_menu.connectDatabase();
+                    String sql = "UPDATE department SET " + editing + "=" + new_val_input.getText() + " WHERE DepartmentID=" + info.id;
+                    PreparedStatement statement = reservation.prepareStatement(sql);
+                    int out = statement.executeUpdate();
+                    Scene callback = DepartmentLookupSubmenu.Build(main_menu, String.valueOf(info.id));
+                    Stage primary = main_menu.getPrimary();
+                    primary.setTitle("Department Management");
+                    primary.setScene(callback);
+                    main_menu.closeDatabase();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
