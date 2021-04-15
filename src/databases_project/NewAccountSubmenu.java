@@ -91,7 +91,12 @@ public class NewAccountSubmenu {
             public void handle(ActionEvent event) {
                 //Put a label with the new ID
 //String sql = "INSERT INTO customeraccount(CustomerID, Balance, InterestRate) VALUES ("+(customer_input.getText())+", "+(init_balance_input.getText())+", "+(interest_rate_input.getText())+");");
-                System.out.println("Creating new acc");
+                try {
+                    addAccountDatabase(main_menu,Integer.parseInt(customer_input.getText()),Float.parseFloat(interest_rate_input.getText()),Float.parseFloat(init_balance_input.getText()));
+                    System.out.println("Creating new acc");
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
         //Add to main VBox
@@ -106,17 +111,15 @@ public class NewAccountSubmenu {
     }
     
   //creation of the query in JDBC. Can be moved directly to database if needed
-    public static void addAccountDatabase(MenuManager mainM, int acctID, int custID, float interestRate, float initialBalance) throws SQLException {
+    public static void addAccountDatabase(MenuManager mainM, int custID, float interestRate, float initialBalance) throws SQLException {
     	//input of new account info into database
     	Connection reservation = mainM.connectDatabase();
-    	String sql = "INSERT INTO account (AccountID, Balance, InterestRate, CustomerID) VALUES(?, ?, ?, ?)";
+    	String sql = "INSERT INTO customeraccount (Balance, InterestRate, CustomerID) VALUES(?, ?, ?)";
     	PreparedStatement statement = reservation.prepareStatement(sql);
-    	statement.setInt(1, acctID);
-    	statement.setInt(2, custID);
-    	statement.setFloat(3, interestRate);
-    	statement.setFloat(4, initialBalance);
-    	mainM.closeDatabase();
-    	
+    	statement.setInt(1, custID);
+    	statement.setFloat(2, interestRate);
+    	statement.setFloat(3, initialBalance);
+        statement.executeUpdate(sql);
     }
     
     //A method for use when we don't have a default ID.
