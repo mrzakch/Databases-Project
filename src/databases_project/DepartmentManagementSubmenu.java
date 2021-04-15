@@ -6,6 +6,9 @@
 package databases_project;
 
 import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -75,6 +78,15 @@ public class DepartmentManagementSubmenu {
                 Scene callback = DepartmentEditingSubmenu.Build(main_menu, "ManagerEmployeeID" ,info);
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("Editing Manager ID");
+                try {
+                    Connection reservation = main_menu.connectDatabase();
+                    String sql = "UPDATE department SET DepartmentEmployeeID = " + info.toString() +  "WHERE EmployeeID=" + info.manager_id;
+                    PreparedStatement statement = reservation.prepareStatement(sql);
+                    int out = statement.executeUpdate();
+                    main_menu.closeDatabase();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 primary.setScene(callback);
             }
         });
