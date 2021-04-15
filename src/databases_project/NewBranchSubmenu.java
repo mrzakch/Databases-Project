@@ -5,6 +5,11 @@
  */
 package databases_project;
 
+import static databases_project.NewCustomerSubmenu.addCustomer;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -82,7 +87,15 @@ public class NewBranchSubmenu {
             @Override
             public void handle(ActionEvent event) {
 //String sql = "INSERT INTO branch(AddressID,ManagerEmployeeID) VALUES ("+(address_input.getText())+", "+(manager_input.getText())+");");
-                System.out.println("Creating new branch");
+                try {
+                    String new_branch_id = addBranch(main_menu, Integer.parseInt(address_input.getText()), Integer.parseInt(manager_input.getText()));
+                    Scene callback = BranchLookupSubmenu.Build(main_menu, new_branch_id);
+                    Stage primary = main_menu.getPrimary();
+                    primary.setTitle("Branch Management");
+                    primary.setScene(callback);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         //Add to main VBox
@@ -98,5 +111,32 @@ public class NewBranchSubmenu {
     //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu){
         return NewBranchSubmenu.Build(main_menu,"");
+    }
+    
+    public static String addBranch(MenuManager mainM, int address_id, int manager_id) throws SQLException {
+        //input of new account info into database
+        Connection reservation = mainM.connectDatabase();
+        String sql = "INSERT INTO branch (AddressID, ManagerEmployeeID) VALUES(?, ?)";
+        PreparedStatement statement = reservation.prepareStatement(sql);
+        statement.setInt(1, address_id);
+        statement.setInt(2, manager_id);
+        int out = statement.executeUpdate();
+
+        if (out == 1) {
+            String get_new_id = "SELECT BranchID FROM branch WHERE  AddressID=" + address_id + " AND ManagerEmployeeID=" + manager_id;
+            PreparedStatement get_statement = reservation.prepareStatement(get_new_id);
+            ResultSet to_return = get_statement.executeQuery(get_new_id);
+            if (to_return.next()) {
+                String new_id = String.valueOf(to_return.getInt("BranchID"));
+                mainM.closeDatabase();
+                return new_id;
+            } else {
+                mainM.closeDatabase();
+                return "Error getting new ID";
+            }
+        } else {
+            mainM.closeDatabase();
+            return "Error creating branch";
+        }
     }
 }
