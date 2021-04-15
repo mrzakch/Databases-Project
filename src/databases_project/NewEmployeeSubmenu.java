@@ -6,6 +6,10 @@
 package databases_project;
 
 import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -101,7 +105,7 @@ public class NewEmployeeSubmenu {
         Label department_label = new Label("Department ID: ");
 
         //Add to department hbox
-        department_hbox.getChildren().addAll(department_label,department_input);
+        //department_hbox.getChildren().addAll(department_label,department_input);
         
         //salary HBox
         HBox salary_hbox = new HBox(5);
@@ -125,7 +129,7 @@ public class NewEmployeeSubmenu {
         Label home_branch_label = new Label("Home Branch ID: ");
 
         //Add to home_branch hbox
-        home_branch_hbox.getChildren().addAll(home_branch_label, home_branch_input);
+        //home_branch_hbox.getChildren().addAll(home_branch_label, home_branch_input);
         
         Button create_emp_button = new Button();
         create_emp_button.setText("Create Employee");
@@ -134,7 +138,15 @@ public class NewEmployeeSubmenu {
             @Override
             public void handle(ActionEvent event) {
 //String sql = "INSERT INTO employee(PersonID, PositionID, DepartmentID, Salary, HomeBranchID) VALUES ("+(person_input.getText())+", "+(position_input.getText())+", "+(department_input.getText())+", "+(salary_input.getText())+", "+(home_branch_input.getText())+");");
-                System.out.println("Create employee click");
+                try {
+                String new_emp_id = addEmployee(main_menu,Integer.parseInt(person_input.getText()),Integer.parseInt(position_input.getText()),Float.parseFloat(salary_input.getText()));
+                Scene callback = EmployeeLookupSubmenu.Build(main_menu, new_emp_id);
+                Stage primary = main_menu.getPrimary();
+                primary.setTitle("Employee Management");
+                primary.setScene(callback);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -151,5 +163,33 @@ public class NewEmployeeSubmenu {
     
     public static Scene Build(MenuManager main_menu){
         return NewEmployeeSubmenu.Build(main_menu,"");
+    }
+    
+    public static String addEmployee(MenuManager mainM, int person_id, int position_id, float salary) throws SQLException {
+        //input of new account info into database
+        Connection reservation = mainM.connectDatabase();
+        String sql = "INSERT INTO employee (PersonID, PositionID, Salary) VALUES(?, ?, ?)";
+        PreparedStatement statement = reservation.prepareStatement(sql);
+        statement.setInt(1, person_id);
+        statement.setInt(2, position_id);
+        statement.setFloat(3,salary);
+        int out = statement.executeUpdate();
+
+        if (out == 1) {
+            String get_new_id = "SELECT EmployeeID FROM employee WHERE  PersonID=" + person_id;
+            PreparedStatement get_statement = reservation.prepareStatement(get_new_id);
+            ResultSet to_return = get_statement.executeQuery(get_new_id);
+            if (to_return.next()) {
+                String new_id = String.valueOf(to_return.getInt("EmployeeID"));
+                mainM.closeDatabase();
+                return new_id;
+            } else {
+                mainM.closeDatabase();
+                return "Error getting new ID";
+            }
+        } else {
+            mainM.closeDatabase();
+            return "Error creating employee";
+        }
     }
 }
