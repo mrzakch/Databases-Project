@@ -6,6 +6,10 @@
 package databases_project;
 
 import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -44,7 +48,7 @@ public class NewPersonSubmenu {
                     Stage primary = main_menu.getPrimary();
                     primary.setTitle("New Customer");
                     primary.setScene(callback);
-                }  else if (calltype.equals("NewEmployeeSubmenu")){
+                } else if (calltype.equals("NewEmployeeSubmenu")) {
                     Scene callback = NewEmployeeSubmenu.Build(main_menu, "");
                     Stage primary = main_menu.getPrimary();
                     primary.setTitle("New Employee");
@@ -74,7 +78,7 @@ public class NewPersonSubmenu {
                 Stage primary = main_menu.getPrimary();
                 primary.setTitle("New Address");
                 primary.setScene(callback);
-            } 
+            }
         });
         //Add to address hbox
         address_hbox.getChildren().addAll(new Label("Address ID: "), address_input, new Label(" or "), new_address);
@@ -105,17 +109,22 @@ public class NewPersonSubmenu {
             public void handle(ActionEvent event) {
                 //implement actual new person id info here
 //String sql = "INSERT INTO person(PersonName, AddressID, SSN) VALUES ("+(name_input.getText())+", "+(address_input.getText())+", "+(ssn_input.getText())+");");
-                Class[] args = {MenuManager.class, String.class};
-                if (calltype.equals("NewCustomerSubmenu")) {
-                    Scene callback = NewCustomerSubmenu.Build(main_menu, "NewPersonID!");
-                    Stage primary = main_menu.getPrimary();
-                    primary.setTitle("New Customer");
-                    primary.setScene(callback);
-                } else if (calltype.equals("NewEmployeeSubmenu")){
-                    Scene callback = NewEmployeeSubmenu.Build(main_menu, "NewPersonID!");
-                    Stage primary = main_menu.getPrimary();
-                    primary.setTitle("New Employee");
-                    primary.setScene(callback);
+                try {
+                    String new_person_id = addPerson(main_menu, name_input.getText(), Integer.parseInt(address_input.getText()), Integer.parseInt(ssn_input.getText()));
+                    Class[] args = {MenuManager.class, String.class};
+                    if (calltype.equals("NewCustomerSubmenu")) {
+                        Scene callback = NewCustomerSubmenu.Build(main_menu, new_person_id);
+                        Stage primary = main_menu.getPrimary();
+                        primary.setTitle("New Customer");
+                        primary.setScene(callback);
+                    } else if (calltype.equals("NewEmployeeSubmenu")) {
+                        Scene callback = NewEmployeeSubmenu.Build(main_menu, new_person_id);
+                        Stage primary = main_menu.getPrimary();
+                        primary.setTitle("New Employee");
+                        primary.setScene(callback);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -133,5 +142,33 @@ public class NewPersonSubmenu {
     //A method for use when we don't have a default ID.
     public static Scene Build(MenuManager main_menu, String calltype) {
         return NewPersonSubmenu.Build(main_menu, calltype, "");
+    }
+
+    public static String addPerson(MenuManager mainM, String name, int AddressID, int SSN) throws SQLException {
+        //input of new account info into database
+        Connection reservation = mainM.connectDatabase();
+        String sql = "INSERT INTO person (PersonName, AddressID, SSN) VALUES(?, ?, ?)";
+        PreparedStatement statement = reservation.prepareStatement(sql);
+        statement.setString(1, name);
+        statement.setInt(2, AddressID);
+        statement.setInt(3, SSN);
+        int out = statement.executeUpdate();
+
+        if (out == 1) {
+            String get_new_id = "SELECT PersonID FROM person WHERE  PersonName=\"" + name + "\" AND SSN=" + SSN;
+            PreparedStatement get_statement = reservation.prepareStatement(get_new_id);
+            ResultSet to_return = get_statement.executeQuery(get_new_id);
+            if (to_return.next()) {
+                String new_id = String.valueOf(to_return.getInt("PersonID"));
+                mainM.closeDatabase();
+                return new_id;
+            } else {
+                mainM.closeDatabase();
+                return "Error getting new ID";
+            }
+        } else {
+            mainM.closeDatabase();
+            return "Error creating new address";
+        }
     }
 }
