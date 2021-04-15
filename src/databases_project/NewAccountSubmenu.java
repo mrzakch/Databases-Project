@@ -82,6 +82,9 @@ public class NewAccountSubmenu {
         TextField init_balance_input = new TextField();
         //Add to balance HBox
         balance_hbox.getChildren().addAll(new Label("Initial Balance: "),init_balance_input);
+        
+        Label new_id = new Label("");
+        
         //Button to create new account
         Button lookup = new Button();
         lookup.setText("Create");
@@ -92,15 +95,16 @@ public class NewAccountSubmenu {
                 //Put a label with the new ID
 //String sql = "INSERT INTO customeraccount(CustomerID, Balance, InterestRate) VALUES ("+(customer_input.getText())+", "+(init_balance_input.getText())+", "+(interest_rate_input.getText())+");");
                 try {
-                    addAccountDatabase(main_menu,Integer.parseInt(customer_input.getText()),Float.parseFloat(interest_rate_input.getText()),Float.parseFloat(init_balance_input.getText()));
-                    System.out.println("Creating new acc");
+                    String create_id = addAccountDatabase(main_menu,Integer.parseInt(customer_input.getText()),Float.parseFloat(interest_rate_input.getText()),Float.parseFloat(init_balance_input.getText()));
+                    new_id.setText("New Account created with ID: "+create_id);
                 } catch (Exception e){
                     e.printStackTrace();
                 }
             }
         });
+        
         //Add to main VBox
-        info_entry.getChildren().addAll(customer_hbox,interest_rate_hbox,balance_hbox,lookup);
+        info_entry.getChildren().addAll(customer_hbox,interest_rate_hbox,balance_hbox,lookup,new_id);
         //Add to root
         pane.getChildren().addAll(info_entry,back_button);
         //Adjust positioning
@@ -111,15 +115,34 @@ public class NewAccountSubmenu {
     }
     
   //creation of the query in JDBC. Can be moved directly to database if needed
-    public static void addAccountDatabase(MenuManager mainM, int custID, float interestRate, float initialBalance) throws SQLException {
+    public static String addAccountDatabase(MenuManager mainM, int custID, float interestRate, float initialBalance) throws SQLException {
     	//input of new account info into database
     	Connection reservation = mainM.connectDatabase();
     	String sql = "INSERT INTO customeraccount (Balance, InterestRate, CustomerID) VALUES(?, ?, ?)";
     	PreparedStatement statement = reservation.prepareStatement(sql);
-    	statement.setInt(1, custID);
+    	statement.setInt(3, custID);
     	statement.setFloat(2, interestRate);
-    	statement.setFloat(3, initialBalance);
+    	statement.setFloat(1, initialBalance);
         statement.executeUpdate();
+        
+        int out=statement.executeUpdate();
+        
+        if (out==1){
+            String get_new_id = "SELECT AccountID FROM customeraccount WHERE  Balance=" +initialBalance+" AND CustomerID="+custID;
+            PreparedStatement get_statement = reservation.prepareStatement(get_new_id);
+            ResultSet to_return = get_statement.executeQuery(get_new_id);
+            if (to_return.next()){
+                String new_id = String.valueOf(to_return.getInt("AccountID"));
+                mainM.closeDatabase();
+                return new_id;
+            } else {
+                mainM.closeDatabase();
+                return "Error getting new ID";
+            }
+        } else {
+            mainM.closeDatabase();
+            return "Error creating new account";
+        }
     }
     
     //A method for use when we don't have a default ID.
