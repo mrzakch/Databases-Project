@@ -119,7 +119,7 @@ public class NewAccountSubmenu {
     	statement.setInt(1, custID);
     	statement.setFloat(2, interestRate);
     	statement.setFloat(3, initialBalance);
-        statement.executeUpdate(sql);
+        statement.executeUpdate();
     }
     
     //A method for use when we don't have a default ID.

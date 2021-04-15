@@ -168,7 +168,7 @@ public class NewPersonSubmenu {
             }
         } else {
             mainM.closeDatabase();
-            return "Error creating new address";
+            return "Error creating new person";
         }
     }
 }
