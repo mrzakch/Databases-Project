@@ -5,6 +5,9 @@
  */
 package databases_project;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -81,11 +84,21 @@ public class TaskLookupSubmenu {
                     int task_num=Integer.parseInt(task_input.getText());
                     System.out.println("Looking up "+task_num);
                     //Add lookup functionality!
-                    //testing assumed lookup
-                    Scene callback = TaskManagementSubmenu.Build(main_menu);
-                    Stage primary = main_menu.getPrimary();
-                    primary.setTitle("Task Management || "+task_input.getText());
-                    primary.setScene(callback);
+                    try {
+                        Connection reservation = main_menu.connectDatabase();
+                        String sql = "SELECT * FROM task WHERE TaskID=" + task_input.getText();
+                        PreparedStatement statement = reservation.prepareStatement(sql);
+                        ResultSet out = statement.executeQuery();
+                        if (out.next()) {
+                            Scene callback = TaskManagementSubmenu.Build(main_menu, new TaskInformation(out.getInt("TaskID"), out.getString("TaskDescription"), out.getString("Title")));
+                            Stage primary = main_menu.getPrimary();
+                            primary.setTitle("Task Management || " + task_input.getText());
+                            primary.setScene(callback);
+                        }
+                        main_menu.closeDatabase();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } catch (NumberFormatException e){
                     System.out.println("Input is NAN");
                     err.setText("Please enter a valid ID");
